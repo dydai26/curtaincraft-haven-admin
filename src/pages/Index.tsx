@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
@@ -6,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { FeaturedCollection, CategoryCollection } from '@/components/home/FeaturedCollection';
+import Reviews from '@/components/reviews/Reviews';
 import { getCategories, getFeaturedProducts, getNewProducts } from '@/lib/data';
 
 const Index = () => {
@@ -153,28 +153,8 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Newsletter Section */}
-        <section className="py-16 bg-primary text-primary-foreground">
-          <div className="container px-4 md:px-6">
-            <div className="mx-auto max-w-xl text-center">
-              <h2 className="text-2xl font-serif font-medium md:text-3xl mb-4">
-                Підпишіться на новини
-              </h2>
-              <p className="mb-8 text-primary-foreground/80">
-                Отримуйте інформацію про нові колекції та спеціальні пропозиції
-              </p>
-              <form className="flex flex-col sm:flex-row gap-2">
-                <input
-                  type="email"
-                  placeholder="Ваш email"
-                  className="flex-1 rounded-md border-0 px-4 py-3 text-foreground bg-background"
-                  required
-                />
-                <Button className="button-hover">Підписатися</Button>
-              </form>
-            </div>
-          </div>
-        </section>
+        {/* Reviews Section */}
+        <Reviews />
       </main>
       <Footer />
     </div>
