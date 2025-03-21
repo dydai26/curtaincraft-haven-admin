@@ -16,10 +16,11 @@ import {
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { FeaturedCollection } from '@/components/home/FeaturedCollection';
-import { getProductById, getProductsByCategory, Product } from '@/lib/data';
+import { getProductById, getProductsByCategory, Product, SizeVariant } from '@/lib/data';
 import { useCart } from '@/context/CartContext';
 
 const ProductDetail = () => {
@@ -29,6 +30,7 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const [selectedSizeVariant, setSelectedSizeVariant] = useState<SizeVariant | null>(null);
   const { addToCart } = useCart();
   const [imagesLoaded, setImagesLoaded] = useState<boolean[]>([]);
 
@@ -44,6 +46,13 @@ const ProductDetail = () => {
           setProduct(fetchedProduct);
           setImagesLoaded(new Array(fetchedProduct.images.length).fill(false));
           
+          // Set default selected size variant if available
+          if (fetchedProduct.sizeVariants && fetchedProduct.sizeVariants.length > 0) {
+            // Try to find an in-stock variant first
+            const inStockVariant = fetchedProduct.sizeVariants.find(v => v.inStock);
+            setSelectedSizeVariant(inStockVariant || fetchedProduct.sizeVariants[0]);
+          }
+          
           // Get related products
           const categoryProducts = getProductsByCategory(fetchedProduct.category);
           const filtered = categoryProducts
@@ -58,7 +67,25 @@ const ProductDetail = () => {
 
   const handleAddToCart = () => {
     if (product) {
-      addToCart(product, quantity);
+      if (selectedSizeVariant) {
+        const productWithSize = {
+          ...product,
+          price: selectedSizeVariant.price,
+          selectedSize: selectedSizeVariant.size,
+        };
+        addToCart(productWithSize, quantity);
+      } else {
+        addToCart(product, quantity);
+      }
+    }
+  };
+
+  const handleSizeChange = (size: string) => {
+    if (product && product.sizeVariants) {
+      const variant = product.sizeVariants.find(v => v.size === size);
+      if (variant) {
+        setSelectedSizeVariant(variant);
+      }
     }
   };
 
@@ -259,7 +286,21 @@ const ProductDetail = () => {
               </div>
 
               <div className="flex items-baseline gap-4">
-                {product.discount ? (
+                {selectedSizeVariant && product.discount ? (
+                  <>
+                    <span className="text-2xl font-medium">
+                      {Math.round(
+                        selectedSizeVariant.price - (selectedSizeVariant.price * product.discount) / 100
+                      )}{' '}
+                      ₴
+                    </span>
+                    <span className="text-lg text-muted-foreground line-through">
+                      {selectedSizeVariant.price} ₴
+                    </span>
+                  </>
+                ) : selectedSizeVariant ? (
+                  <span className="text-2xl font-medium">{selectedSizeVariant.price} ₴</span>
+                ) : product.discount ? (
                   <>
                     <span className="text-2xl font-medium">
                       {Math.round(
@@ -278,7 +319,16 @@ const ProductDetail = () => {
 
               <div className="space-y-2">
                 <p className="text-sm text-muted-foreground">
-                  {product.inStock ? (
+                  {selectedSizeVariant ? (
+                    selectedSizeVariant.inStock ? (
+                      <span className="flex items-center text-green-600">
+                        <Check className="mr-1 h-4 w-4" />
+                        В наявності
+                      </span>
+                    ) : (
+                      <span className="text-muted-foreground">Немає в наявності</span>
+                    )
+                  ) : product.inStock ? (
                     <span className="flex items-center text-green-600">
                       <Check className="mr-1 h-4 w-4" />
                       В наявності
@@ -289,6 +339,56 @@ const ProductDetail = () => {
                 </p>
                 <p className="text-md">{product.description}</p>
               </div>
+
+              {/* Size Variants */}
+              {product.sizeVariants && product.sizeVariants.length > 0 && (
+                <div className="space-y-3">
+                  <h3 className="text-sm font-medium">Розміри:</h3>
+                  <RadioGroup 
+                    value={selectedSizeVariant?.size || ''} 
+                    onValueChange={handleSizeChange}
+                    className="flex flex-wrap gap-3"
+                  >
+                    {product.sizeVariants.map((variant) => (
+                      <div 
+                        key={variant.size} 
+                        className={`
+                          flex items-center justify-between rounded-md border p-3 
+                          ${variant.inStock ? 'cursor-pointer hover:border-primary' : 'opacity-60 cursor-not-allowed'} 
+                          ${selectedSizeVariant?.size === variant.size ? 'border-primary' : 'border-border'}
+                        `}
+                      >
+                        <div className="flex items-center space-x-3">
+                          <RadioGroupItem 
+                            value={variant.size} 
+                            id={`size-${variant.size}`} 
+                            disabled={!variant.inStock}
+                          />
+                          <label 
+                            htmlFor={`size-${variant.size}`}
+                            className="text-sm cursor-pointer font-medium flex flex-col"
+                          >
+                            <span>{variant.size}</span>
+                            <span className="font-normal text-muted-foreground">
+                              {product.discount ? (
+                                <>
+                                  {Math.round(variant.price - (variant.price * product.discount) / 100)} ₴
+                                  <span className="ml-2 text-xs line-through">{variant.price} ₴</span>
+                                </>
+                              ) : (
+                                `${variant.price} ₴`
+                              )}
+                            </span>
+                          </label>
+                        </div>
+                        {!variant.inStock && 
+                          <span className="text-xs text-muted-foreground">Немає в наявності</span>
+                        }
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </div>
+              )}
 
               {product.material && (
                 <div>
@@ -304,7 +404,7 @@ const ProductDetail = () => {
                 </div>
               )}
 
-              {product.inStock && (
+              {((selectedSizeVariant && selectedSizeVariant.inStock) || (!selectedSizeVariant && product.inStock)) && (
                 <div className="space-y-4">
                   <div className="flex items-center space-x-4">
                     <h3 className="text-sm font-medium">Кількість:</h3>
