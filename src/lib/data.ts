@@ -1,3 +1,9 @@
+export type SizeVariant = {
+  size: string;
+  price: number;
+  inStock: boolean;
+};
+
 export type Product = {
   id: number;
   name: string;
@@ -14,6 +20,7 @@ export type Product = {
   isNew?: boolean;
   isFeatured?: boolean;
   discount?: number;
+  sizeVariants?: SizeVariant[];
 };
 
 export type Category = {
@@ -42,6 +49,12 @@ export const getProducts = (): Product[] => [
     features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
     inStock: true,
     isFeatured: true,
+    sizeVariants: [
+      { size: "150x250 см", price: 1199, inStock: true },
+      { size: "200x250 см", price: 1299, inStock: true },
+      { size: "300x250 см", price: 1499, inStock: true },
+      { size: "400x250 см", price: 1899, inStock: false }
+    ]
   },
   {
     id: 2,
@@ -60,6 +73,12 @@ export const getProducts = (): Product[] => [
     features: ["Легке драпірування", "Стійкість до вигорання", "Гіпоалергенний матеріал"],
     inStock: true,
     isNew: true,
+    sizeVariants: [
+      { size: "200x260 см", price: 699, inStock: true },
+      { size: "300x260 см", price: 799, inStock: true },
+      { size: "400x260 см", price: 999, inStock: true },
+      { size: "500x260 см", price: 1199, inStock: true }
+    ]
   },
   {
     id: 3,
@@ -74,6 +93,12 @@ export const getProducts = (): Product[] => [
     dimensions: "Довжина: 200 см, Діаметр: 2.5 см",
     features: ["Легкий монтаж", "Витримує до 15 кг", "Безшумне ковзання"],
     inStock: true,
+    sizeVariants: [
+      { size: "150 см", price: 499, inStock: true },
+      { size: "200 см", price: 599, inStock: true },
+      { size: "250 см", price: 699, inStock: true },
+      { size: "300 см", price: 799, inStock: true }
+    ]
   },
   {
     id: 4,
@@ -92,6 +117,12 @@ export const getProducts = (): Product[] => [
     features: ["Повне затемнення", "Звукоізоляція", "Термоізоляція"],
     inStock: true,
     isFeatured: true,
+    sizeVariants: [
+      { size: "150x270 см", price: 1499, inStock: true },
+      { size: "200x270 см", price: 1599, inStock: true },
+      { size: "300x270 см", price: 1899, inStock: true },
+      { size: "400x270 см", price: 2199, inStock: false }
+    ]
   },
   {
     id: 5,
@@ -109,6 +140,12 @@ export const getProducts = (): Product[] => [
     features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
     inStock: true,
     isFeatured: true,
+    sizeVariants: [
+      { size: "200x260 см", price: 899, inStock: true },
+      { size: "300x260 см", price: 1099, inStock: true },
+      { size: "400x260 см", price: 1399, inStock: true },
+      { size: "500x260 см", price: 1699, inStock: false }
+    ]
   },
   {
     id: 6,
@@ -123,6 +160,12 @@ export const getProducts = (): Product[] => [
     features: ["Потужні магніти", "Не пошкоджують тканину", "Легке регулювання"],
     inStock: true,
     isNew: true,
+    sizeVariants: [
+      { size: "Малий (2 шт)", price: 249, inStock: true },
+      { size: "Середній (2 шт)", price: 299, inStock: true },
+      { size: "Великий (2 шт)", price: 349, inStock: true },
+      { size: "Набір (6 шт)", price: 699, inStock: true }
+    ]
   },
   {
     id: 7,
@@ -139,6 +182,12 @@ export const getProducts = (): Product[] => [
     care: "Прання при 40°C, можливо легке зсідання",
     features: ["Екологічно чисті", "Натуральне повітропроникнення", "Антистатичні"],
     inStock: true,
+    sizeVariants: [
+      { size: "145x250 см", price: 1099, inStock: true },
+      { size: "145x270 см", price: 1199, inStock: true },
+      { size: "290x250 см", price: 1899, inStock: true },
+      { size: "290x270 см", price: 1999, inStock: true }
+    ]
   },
   {
     id: 8,
@@ -155,6 +204,12 @@ export const getProducts = (): Product[] => [
     care: "Делікатне прання при 30°C",
     features: ["Ультралегкий", "Висока повітропроникність", "Ефект 'хмаринки'"],
     inStock: true,
+    sizeVariants: [
+      { size: "300x250 см", price: 649, inStock: true },
+      { size: "300x280 см", price: 699, inStock: true },
+      { size: "400x250 см", price: 849, inStock: true },
+      { size: "400x280 см", price: 899, inStock: true }
+    ]
   },
   {
     id: 9,
@@ -168,6 +223,12 @@ export const getProducts = (): Product[] => [
     material: "Метал з декоративними елементами",
     features: ["Легкий монтаж", "Стильний дизайн", "Універсальне кріплення"],
     inStock: true,
+    sizeVariants: [
+      { size: "Класичний", price: 399, inStock: true },
+      { size: "Модерн", price: 449, inStock: true },
+      { size: "Вінтаж", price: 499, inStock: true },
+      { size: "Преміум", price: 599, inStock: true }
+    ]
   },
   {
     id: 10,
@@ -185,6 +246,12 @@ export const getProducts = (): Product[] => [
     features: ["100% затемнення", "Звукоізоляція", "Енергозбереження"],
     inStock: true,
     isFeatured: true,
+    sizeVariants: [
+      { size: "150x250 см", price: 1299, inStock: true },
+      { size: "150x270 см", price: 1399, inStock: true },
+      { size: "200x250 см", price: 1599, inStock: true },
+      { size: "200x270 см", price: 1699, inStock: false }
+    ]
   },
   {
     id: 11,
@@ -201,6 +268,12 @@ export const getProducts = (): Product[] => [
     care: "Делікатне прання при 30°C, прасування при низькій температурі",
     features: ["М'яке розсіювання світла", "Елегантний блиск", "Висока міцність"],
     inStock: true,
+    sizeVariants: [
+      { size: "290x250 см", price: 899, inStock: true },
+      { size: "290x270 см", price: 949, inStock: true },
+      { size: "400x250 см", price: 1099, inStock: true },
+      { size: "400x270 см", price: 1149, inStock: false }
+    ]
   },
   {
     id: 12,
@@ -218,6 +291,12 @@ export const getProducts = (): Product[] => [
     features: ["Екологічно чистий", "Висока повітропроникність", "Антистатичні властивості"],
     inStock: true,
     isNew: true,
+    sizeVariants: [
+      { size: "280x250 см", price: 1099, inStock: true },
+      { size: "280x260 см", price: 1199, inStock: true },
+      { size: "300x250 см", price: 1249, inStock: true },
+      { size: "300x260 см", price: 1299, inStock: true }
+    ]
   },
   {
     id: 13,
@@ -235,6 +314,12 @@ export const getProducts = (): Product[] => [
     features: ["Вишуканий візерунок", "Висока щільність", "Стійкий до вигорання"],
     inStock: true,
     isFeatured: true,
+    sizeVariants: [
+      { size: "300x250 см", price: 1399, inStock: true },
+      { size: "300x270 см", price: 1499, inStock: true },
+      { size: "400x250 см", price: 1699, inStock: true },
+      { size: "400x270 см", price: 1899, inStock: true }
+    ]
   }
 ];
 
