@@ -1,4 +1,3 @@
-
 export type Product = {
   id: number;
   name: string;
@@ -49,6 +48,7 @@ export const getProducts = (): Product[] => [
     name: "Тюль 'Ніжність'",
     price: 799,
     category: 'tulle',
+    subcategory: 'Шатін',
     images: [
       'https://images.unsplash.com/photo-1513161455079-7dc1de15ef3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1596162954151-cdcb4c0f70ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
@@ -98,6 +98,7 @@ export const getProducts = (): Product[] => [
     name: "Вишитий тюль 'Флора'",
     price: 1099,
     category: 'tulle',
+    subcategory: 'Жаккард',
     images: [
       'https://images.unsplash.com/photo-1574879948818-1cfda7aa5b1a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
     ],
@@ -144,6 +145,7 @@ export const getProducts = (): Product[] => [
     name: "Легкий тюль 'Хмаринка'",
     price: 699,
     category: 'tulle',
+    subcategory: 'Льон',
     images: [
       'https://images.unsplash.com/photo-1543377950-dd5c1416db32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
     ],
@@ -181,6 +183,56 @@ export const getProducts = (): Product[] => [
     dimensions: "Ширина: 150 см, Висота: 270 см",
     care: "Машинне прання при 30°C, прасування при низькій температурі",
     features: ["100% затемнення", "Звукоізоляція", "Енергозбереження"],
+    inStock: true,
+    isFeatured: true,
+  },
+  {
+    id: 11,
+    name: "Тюль 'Ранковий туман'",
+    price: 899,
+    category: 'tulle',
+    subcategory: 'Шатін',
+    images: [
+      'https://images.unsplash.com/photo-1531835551805-16d864c8d311?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+    ],
+    description: "Тюль 'Ранковий туман' з тканини шатін створює м'який, розсіяний світловий ефект. Ідеально підходить для спальні чи вітальні, де потрібна атмосфера затишку.",
+    material: "Шатін (суміш бавовни та поліестеру)",
+    dimensions: "Ширина: 290 см, Висота: 250 см",
+    care: "Делікатне прання при 30°C, прасування при низькій температурі",
+    features: ["М'яке розсіювання світла", "Елегантний блиск", "Висока міцність"],
+    inStock: true,
+  },
+  {
+    id: 12,
+    name: "Тюль 'Натуральний бриз'",
+    price: 1199,
+    category: 'tulle',
+    subcategory: 'Льон',
+    images: [
+      'https://images.unsplash.com/photo-1585421514738-01798e348b17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+    ],
+    description: "Легкий льняний тюль 'Натуральний бриз' створений для цінителів екологічних матеріалів. Пропускає повітря та створює м'яке природне освітлення.",
+    material: "100% льон",
+    dimensions: "Ширина: 280 см, Висота: 260 см",
+    care: "Прання при 40°C, можливе незначне зсідання",
+    features: ["Екологічно чистий", "Висока повітропроникність", "Антистатичні властивості"],
+    inStock: true,
+    isNew: true,
+  },
+  {
+    id: 13,
+    name: "Тюль 'Королівський візерунок'",
+    price: 1499,
+    category: 'tulle',
+    subcategory: 'Жаккард',
+    images: [
+      'https://images.unsplash.com/photo-1540730930991-a9086203f751?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+    ],
+    description: "Розкішний жаккардовий тюль з вишуканим візерунком. Ідеальний вибір для оформлення класичних інтер'єрів та створення атмосфери розкоші.",
+    material: "Жаккардовий поліестер",
+    dimensions: "Ширина: 300 см, Висота: 270 см",
+    care: "Тільки хімчистка",
+    features: ["Вишуканий візерунок", "Висока щільність", "Стійкий до вигорання"],
     inStock: true,
     isFeatured: true,
   }
