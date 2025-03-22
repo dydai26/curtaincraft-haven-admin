@@ -1,18 +1,11 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Product, SizeVariant } from '@/lib/data';
+import { Product } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/context/CartContext';
 import { ShoppingCart, Eye, ChevronDown } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 
 interface ProductCardProps {
   product: Product;
@@ -21,35 +14,11 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToCart } = useCart();
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-  const [selectedVariant, setSelectedVariant] = useState<SizeVariant | null>(
-    product.sizeVariants && product.sizeVariants.length > 0
-      ? product.sizeVariants.find(v => v.inStock) || product.sizeVariants[0]
-      : null
-  );
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
-    if (selectedVariant) {
-      const productWithSize = {
-        ...product,
-        price: selectedVariant.price,
-        selectedSize: selectedVariant.size,
-      };
-      addToCart(productWithSize, 1);
-    } else {
-      addToCart(product, 1);
-    }
-  };
-
-  const handleSizeChange = (value: string) => {
-    if (product.sizeVariants) {
-      const variant = product.sizeVariants.find(v => v.size === value);
-      if (variant) {
-        setSelectedVariant(variant);
-      }
-    }
+    addToCart(product, 1);
   };
 
   return (
@@ -112,49 +81,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               : 'Аксесуари'}
           </p>
           
-          {product.sizeVariants && product.sizeVariants.length > 0 && (
-            <div className="mt-2 mb-2" onClick={(e) => e.preventDefault()}>
-              <Select 
-                value={selectedVariant?.size} 
-                onValueChange={handleSizeChange}
-              >
-                <SelectTrigger className="h-8 text-xs">
-                  <SelectValue placeholder="Виберіть розмір" />
-                </SelectTrigger>
-                <SelectContent>
-                  {product.sizeVariants.map((variant) => (
-                    <SelectItem 
-                      key={variant.size} 
-                      value={variant.size}
-                      disabled={!variant.inStock}
-                      className={!variant.inStock ? "text-muted-foreground" : ""}
-                    >
-                      {variant.size} 
-                      {!variant.inStock && " (немає в наявності)"}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          )}
-          
           <div className="mt-2 flex items-baseline justify-between">
             <div className="font-medium">
-              {product.discount && selectedVariant ? (
-                <div className="flex items-center gap-2">
-                  <span className="font-medium">
-                    {Math.round(
-                      selectedVariant.price - (selectedVariant.price * product.discount) / 100
-                    )}{' '}
-                    ₴
-                  </span>
-                  <span className="text-sm text-muted-foreground line-through">
-                    {selectedVariant.price} ₴
-                  </span>
-                </div>
-              ) : selectedVariant ? (
-                <span>{selectedVariant.price} ₴</span>
-              ) : product.discount ? (
+              {product.discount ? (
                 <div className="flex items-center gap-2">
                   <span className="font-medium">
                     {Math.round(
@@ -171,10 +100,21 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               )}
             </div>
             <div className="text-xs text-muted-foreground">
-              {selectedVariant 
-                ? selectedVariant.inStock ? 'В наявності' : 'Немає в наявності'
-                : product.inStock ? 'В наявності' : 'Немає в наявності'}
+              {product.inStock ? 'В наявності' : 'Немає в наявності'}
             </div>
+          </div>
+          
+          <div className="mt-3">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="w-full" 
+              asChild
+            >
+              <Link to={`/product/${product.id}`}>
+                Детальніше
+              </Link>
+            </Button>
           </div>
         </div>
       </div>
