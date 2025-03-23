@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -10,7 +9,9 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { X, Plus } from 'lucide-react';
+import { X, Plus, Upload, Image } from 'lucide-react';
+import { fileToBase64 } from '@/lib/adminUtils';
+import { useToast } from '@/components/ui/use-toast';
 
 const formSchema = z.object({
   name: z.string().min(3, { message: 'Назва товару має бути не менше 3 символів' }),
@@ -55,6 +56,9 @@ const ProductForm: React.FC<ProductFormProps> = ({
   const [features, setFeatures] = useState<string[]>(product?.features || []);
   const [images, setImages] = useState<string[]>(product?.images || []);
   const [imageUrl, setImageUrl] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const { toast } = useToast();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -109,13 +113,43 @@ const ProductForm: React.FC<ProductFormProps> = ({
   const addFeature = (feature: string) => {
     if (feature.trim() !== "") {
       setFeatures([...features, feature]);
-      // Removed form.setValue('features', [...features, feature]) as it's not in the form schema
     }
   };
 
   const removeFeature = (index: number) => {
     setFeatures(features.filter((_, i) => i !== index));
-    // Removed form.setValue('features', features.filter((_, i) => i !== index)) as it's not in the form schema
+  };
+
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
+
+    setIsUploading(true);
+    try {
+      const filePromises = Array.from(files).map(file => fileToBase64(file));
+      const base64Images = await Promise.all(filePromises);
+      
+      const newImages = [...images, ...base64Images];
+      setImages(newImages);
+      form.setValue('images', newImages);
+      
+      toast({
+        title: "Зображення завантажено",
+        description: `${files.length} ${files.length === 1 ? 'зображення було' : 'зображень було'} успішно завантажено.`,
+      });
+    } catch (error) {
+      toast({
+        title: "Помилка завантаження",
+        description: "Не вдалося завантажити зображення. Спробуйте ще раз.",
+        variant: "destructive",
+      });
+      console.error("Error uploading images:", error);
+    } finally {
+      setIsUploading(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
   };
 
   const addImage = () => {
@@ -131,6 +165,10 @@ const ProductForm: React.FC<ProductFormProps> = ({
     const newImages = images.filter((_, i) => i !== index);
     setImages(newImages);
     form.setValue('images', newImages);
+  };
+
+  const triggerFileInput = () => {
+    fileInputRef.current?.click();
   };
 
   return (
@@ -309,6 +347,9 @@ const ProductForm: React.FC<ProductFormProps> = ({
                 <div className="space-y-2">
                   {images.map((image, index) => (
                     <div key={index} className="flex items-center gap-2">
+                      <div className="relative w-12 h-12 overflow-hidden rounded border mr-2">
+                        <img src={image} alt={`Товар ${index + 1}`} className="w-full h-full object-cover" />
+                      </div>
                       <Input value={image} disabled className="flex-grow" />
                       <Button 
                         type="button" 
@@ -320,20 +361,56 @@ const ProductForm: React.FC<ProductFormProps> = ({
                       </Button>
                     </div>
                   ))}
-                  <div className="flex items-center gap-2">
-                    <Input
-                      placeholder="URL зображення"
-                      value={imageUrl}
-                      onChange={(e) => setImageUrl(e.target.value)}
-                      className="flex-grow"
-                    />
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={addImage}
-                    >
-                      Додати
-                    </Button>
+                  
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center gap-2">
+                      <Input
+                        placeholder="URL зображення"
+                        value={imageUrl}
+                        onChange={(e) => setImageUrl(e.target.value)}
+                        className="flex-grow"
+                      />
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={addImage}
+                      >
+                        Додати URL
+                      </Button>
+                    </div>
+                    
+                    <div className="flex items-center gap-2 mt-2">
+                      <input
+                        type="file"
+                        ref={fileInputRef}
+                        onChange={handleFileChange}
+                        accept="image/*"
+                        multiple
+                        className="hidden"
+                      />
+                      <Button
+                        type="button"
+                        variant="secondary"
+                        onClick={triggerFileInput}
+                        disabled={isUploading}
+                        className="w-full"
+                      >
+                        {isUploading ? (
+                          <span className="flex items-center gap-2">
+                            <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Завантаження...
+                          </span>
+                        ) : (
+                          <span className="flex items-center gap-2">
+                            <Upload className="h-4 w-4" />
+                            Завантажити з комп'ютера
+                          </span>
+                        )}
+                      </Button>
+                    </div>
                   </div>
                 </div>
                 {form.formState.errors.images && (
