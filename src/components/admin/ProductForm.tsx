@@ -109,13 +109,13 @@ const ProductForm: React.FC<ProductFormProps> = ({
   const addFeature = (feature: string) => {
     if (feature.trim() !== "") {
       setFeatures([...features, feature]);
-      form.setValue('features', [...features, feature]);
+      // Removed form.setValue('features', [...features, feature]) as it's not in the form schema
     }
   };
 
   const removeFeature = (index: number) => {
     setFeatures(features.filter((_, i) => i !== index));
-    form.setValue('features', features.filter((_, i) => i !== index));
+    // Removed form.setValue('features', features.filter((_, i) => i !== index)) as it's not in the form schema
   };
 
   const addImage = () => {
@@ -412,7 +412,6 @@ const ProductForm: React.FC<ProductFormProps> = ({
                   <div className="flex items-center gap-2">
                     <Input
                       placeholder="Нова особливість"
-                      value={features.length > 0 ? "" : ""}
                       onChange={(e) => {}}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter') {

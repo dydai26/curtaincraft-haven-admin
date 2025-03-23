@@ -10,3 +10,26 @@ export const loadProducts = (): Product[] | null => {
   const savedProducts = localStorage.getItem('admin_products');
   return savedProducts ? JSON.parse(savedProducts) : null;
 };
+
+// Helper for saving an individual product
+export const saveProduct = (product: Product): void => {
+  const existingProducts = loadProducts() || [];
+  const productIndex = existingProducts.findIndex(p => p.id === product.id);
+  
+  if (productIndex >= 0) {
+    // Update existing product
+    existingProducts[productIndex] = product;
+  } else {
+    // Add new product
+    existingProducts.push(product);
+  }
+  
+  saveProducts(existingProducts);
+};
+
+// Helper for deleting a product
+export const deleteProduct = (productId: number): void => {
+  const existingProducts = loadProducts() || [];
+  const updatedProducts = existingProducts.filter(p => p.id !== productId);
+  saveProducts(updatedProducts);
+};

@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getProducts, Product } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,13 +8,27 @@ import { Edit, Search, Trash, Plus } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import ProductForm from './ProductForm';
+import { saveProduct, deleteProduct, loadProducts, saveProducts } from '@/lib/adminUtils';
 
 const ProductsAdmin = () => {
-  const [products, setProducts] = useState<Product[]>(getProducts());
+  const [products, setProducts] = useState<Product[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [isAddingProduct, setIsAddingProduct] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const { toast } = useToast();
+
+  // Load products on component mount
+  useEffect(() => {
+    const loadedProducts = loadProducts();
+    if (loadedProducts) {
+      setProducts(loadedProducts);
+    } else {
+      // Initialize with default products if none exist
+      const defaultProducts = getProducts();
+      setProducts(defaultProducts);
+      saveProducts(defaultProducts);
+    }
+  }, []);
 
   const filteredProducts = products.filter(product => 
     product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -25,6 +39,7 @@ const ProductsAdmin = () => {
     if (editingProduct) {
       // Update existing product
       setProducts(products.map(p => p.id === product.id ? product : p));
+      saveProduct(product);
       toast({
         title: "Товар оновлено",
         description: `${product.name} було успішно оновлено.`,
@@ -32,6 +47,7 @@ const ProductsAdmin = () => {
     } else {
       // Add new product
       setProducts([...products, product]);
+      saveProduct(product);
       toast({
         title: "Товар додано",
         description: `${product.name} було успішно додано до каталогу.`,
@@ -44,8 +60,8 @@ const ProductsAdmin = () => {
   };
 
   const handleDeleteProduct = (product: Product) => {
-    // In a real app, you would likely ask for confirmation before deleting
     setProducts(products.filter(p => p.id !== product.id));
+    deleteProduct(product.id);
     toast({
       title: "Товар видалено",
       description: `${product.name} було успішно видалено з каталогу.`,

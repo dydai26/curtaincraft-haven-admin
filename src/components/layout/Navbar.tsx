@@ -5,11 +5,14 @@ import { ShoppingBag, Menu, X, Search } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { Button } from '@/components/ui/button';
 import { getCategories } from '@/lib/data';
+import AdminNavLink from '@/components/admin/AdminNavLink';
+import { useAuth } from '@/context/AuthContext';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { totalItems } = useCart();
+  const { isAdmin } = useAuth();
   const location = useLocation();
   const categories = getCategories();
 
@@ -77,6 +80,7 @@ const Navbar = () => {
                 <span className="sr-only">Кошик</span>
               </Button>
             </Link>
+            {isAdmin && <AdminNavLink />}
             <Button
               variant="ghost"
               size="icon"
@@ -113,6 +117,14 @@ const Navbar = () => {
                 {category.name}
               </Link>
             ))}
+            {isAdmin && (
+              <Link
+                to="/admin"
+                className="block py-2 text-lg font-medium transition-colors hover:text-primary/80"
+              >
+                Адмін панель
+              </Link>
+            )}
             <div className="pt-2">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
