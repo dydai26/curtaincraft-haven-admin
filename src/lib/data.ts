@@ -34,16 +34,16 @@ export type Category = {
 export const getProducts = (): Product[] => [
   {
     id: 1,
-    name: "Елегантні штори 'Венеція'",
+    name: "Штори льон-блекаут",
     price: 1299,
     category: 'curtains',
-    subcategory: 'Класичні',
+    subcategory: 'Льон-Блекаут',
     images: [
-      'https://images.unsplash.com/photo-1585412727339-54e4bae3bbf9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1636742794236-7fbfad6262a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+      '/public/1.jpg',
+      '/public/2-2.jpg'
     ],
-    description: "Розкішні штори 'Венеція' додадуть елегантності та витонченості вашому інтер'єру. Виготовлені з високоякісного жакардового матеріалу, ці штори забезпечують відмінну звукоізоляцію та захист від сонячних променів.",
-    material: "100% поліестер, жакардове плетіння",
+    description: "Шторний матеріал льон-блекаут. Колір графітовий, максимальна висота 2,90м. Продаємо на метраж або шиємо під індивідуальні розміри.",
+    material: "Льон-Блекаут",
     dimensions: "Ширина: 150 см, Висота: 270 см",
     care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
     features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
@@ -58,13 +58,277 @@ export const getProducts = (): Product[] => [
   },
   {
     id: 2,
-    name: "Тюль 'Ніжність'",
+    name: "Штори льон-блекаут",
+    price: 1299,
+    category: 'curtains',
+    subcategory: 'Льон-Блекаут',
+    images: [
+      '/public/IMG_7124 копія.jpg',
+      '/public/IMG_6613.jpg',
+      '/public/7-7.jpg',
+    ],
+    description: "Шторний матеріал льон-блекаут. Колір коричневий, максимальна висота 2,90м. Продаємо на метраж або шиємо під індивідуальні розміри.",
+    material: "Льон-Блекаут",
+    dimensions: "Ширина: 150 см, Висота: 270 см",
+    care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
+    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    inStock: true,
+   
+    sizeVariants: [
+      { size: "150x250 см", price: 1199, inStock: true },
+      { size: "200x250 см", price: 1299, inStock: true },
+      { size: "300x250 см", price: 1499, inStock: true },
+      { size: "400x250 см", price: 1899, inStock: false }
+    ]
+  },
+  {
+    id: 3,
+    name: "Штори льон-блекаут",
+    price: 1299,
+    category: 'curtains',
+    subcategory: 'Льон-Блекаут',
+    images: [
+      '/public/3.jpg',
+      '/public/3-3.jpg'
+    ],
+    description: "Шторний матеріал льон-блекаут. Колір бордовий, максимальна висота 2,90м. Продаємо на метраж або шиємо під індивідуальні розміри.",
+    material: "Льон-Блекаут",
+    dimensions: "Ширина: 150 см, Висота: 270 см",
+    care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
+    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    inStock: true,
+    
+    sizeVariants: [
+      { size: "150x250 см", price: 1199, inStock: true },
+      { size: "200x250 см", price: 1299, inStock: true },
+      { size: "300x250 см", price: 1499, inStock: true },
+      { size: "400x250 см", price: 1899, inStock: false }
+    ]
+  },
+  {
+    id: 4,
+    name: "Штори льон-блекаут",
+    price: 1299,
+    category: 'curtains',
+    subcategory: 'Льон-Блекаут',
+    images: [
+      '/public/4.jpg'
+    ],
+    description: "Шторний матеріал льон-блекаут. Колір солм'яний, максимальна висота 2,90м. Продаємо на метраж або шиємо під індивідуальні розміри.",
+    material: "Льон-Блекаут",
+    dimensions: "Ширина: 150 см, Висота: 270 см",
+    care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
+    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    inStock: true,
+    isNew: true,
+    sizeVariants: [
+      { size: "150x250 см", price: 1199, inStock: true },
+      { size: "200x250 см", price: 1299, inStock: true },
+      { size: "300x250 см", price: 1499, inStock: true },
+      { size: "400x250 см", price: 1899, inStock: false }
+    ]
+  },
+  {
+    id: 5,
+    name: "Штори льон-блекаут",
+    price: 1299,
+    category: 'curtains',
+    subcategory: 'Льон-Блекаут',
+    images: [
+      '/public/IMG_7115.jpg',
+      '/public/11-1.jpg'
+    ],
+    description: "Шторний матеріал льон-блекаут. Колір бєжевий, максимальна висота 2,90м. Продаємо на метраж або шиємо під індивідуальні розміри.",
+    material: "Льон-Блекаут",
+    dimensions: "Ширина: 150 см, Висота: 270 см",
+    care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
+    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    inStock: true,
+    isFeatured: true,
+    sizeVariants: [
+      { size: "150x250 см", price: 1199, inStock: true },
+      { size: "200x250 см", price: 1299, inStock: true },
+      { size: "300x250 см", price: 1499, inStock: true },
+      { size: "400x250 см", price: 1899, inStock: false }
+    ]
+  },
+  {
+    id: 6,
+    name: "Штори льон-блекаут",
+    price: 1299,
+    category: 'curtains',
+    subcategory: 'Льон-Блекаут',
+    images: [
+      
+      '/public/13.jpg'
+    ],
+    description: "Шторний матеріал льон-блекаут. Колір салатовий, максимальна висота 2,90м. Продаємо на метраж або шиємо під індивідуальні розміри.",
+    material: "Льон-Блекаут",
+    dimensions: "Ширина: 150 см, Висота: 270 см",
+    care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
+    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    inStock: true,
+    
+    sizeVariants: [
+      { size: "150x250 см", price: 1199, inStock: true },
+      { size: "200x250 см", price: 1299, inStock: true },
+      { size: "300x250 см", price: 1499, inStock: true },
+      { size: "400x250 см", price: 1899, inStock: false }
+    ]
+  },
+  {
+    id: 7,
+    name: "Штори льон-блекаут",
+    price: 1299,
+    category: 'curtains',
+    subcategory: 'Льон-Блекаут',
+    images: [
+      '/public/5.jpg',
+      '/public/11111.jpg'
+    ],
+    description: "Шторний матеріал льон-блекаут. Колір комбіновані коричневий з бежевим, максимальна висота 2,90м. Продаємо на метраж або шиємо під індивідуальні розміри.",
+    material: "Льон-Блекаут",
+    dimensions: "Ширина: 150 см, Висота: 270 см",
+    care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
+    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    inStock: true,
+    
+    sizeVariants: [
+      { size: "150x250 см", price: 1199, inStock: true },
+      { size: "200x250 см", price: 1299, inStock: true },
+      { size: "300x250 см", price: 1499, inStock: true },
+      { size: "400x250 см", price: 1899, inStock: false }
+    ]
+  },
+  {
+    id: 8,
+    name: "Штори льон-блекаут",
+    price: 1299,
+    category: 'curtains',
+    subcategory: 'Льон-Блекаут',
+    images: [
+      '/public/16.jpg'
+      
+    ],
+    description: "Шторний матеріал льон-блекаут. Колір комбіновані коричневий з сірим, максимальна висота 2,90м. Продаємо на метраж або шиємо під індивідуальні розміри.",
+    material: "Льон-Блекаут",
+    dimensions: "Ширина: 150 см, Висота: 270 см",
+    care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
+    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    inStock: true,
+    isFeatured: true,
+    sizeVariants: [
+      { size: "150x250 см", price: 1199, inStock: true },
+      { size: "200x250 см", price: 1299, inStock: true },
+      { size: "300x250 см", price: 1499, inStock: true },
+      { size: "400x250 см", price: 1899, inStock: false }
+    ]
+  },
+  {
+    id: 9,
+    name: "Штори льон-блекаут",
+    price: 1299,
+    category: 'curtains',
+    subcategory: 'Льон-Блекаут',
+    images: [
+      '/public/curtain 1.png',
+      '/public/curtain2.png'
+    ],
+    description: "Шторний матеріал льон-блекаут. Колір графітовий, максимальна висота 2,90м. Продаємо на метраж або шиємо під індивідуальні розміри.",
+    material: "Льон-Блекаут двохсторонній",
+    dimensions: "Ширина: 150 см, Висота: 270 см",
+    care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
+    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    inStock: true,
+    
+    sizeVariants: [
+      { size: "150x250 см", price: 1199, inStock: true },
+      { size: "200x250 см", price: 1299, inStock: true },
+      { size: "300x250 см", price: 1499, inStock: true },
+      { size: "400x250 см", price: 1899, inStock: false }
+    ]
+  },
+  {
+    id: 10,
+    name: "Мікровелюр",
+    price: 1299,
+    category: 'curtains',
+    subcategory: 'Мікровелюр',
+    images: [
+      '/public/IMG_8391.jpg',
+      '/public/mic3.jpg'
+    ],
+    description: "Шторний матеріал мікровелюр. Колір коричневий, максимальна висота 2,90м. Продаємо на метраж або шиємо під індивідуальні розміри.",
+    material: "Мікровелюр",
+    dimensions: "Ширина: 150 см, Висота: 270 см",
+    care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
+    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    inStock: true,
+    isFeatured: true,
+    sizeVariants: [
+      { size: "150x250 см", price: 1199, inStock: true },
+      { size: "200x250 см", price: 1299, inStock: true },
+      { size: "300x250 см", price: 1499, inStock: true },
+      { size: "400x250 см", price: 1899, inStock: false }
+    ]
+  },
+  {
+    id: 11,
+    name: "Мікровелюр",
+    price: 1299,
+    category: 'curtains',
+    subcategory: 'Мікровелюр',
+    images: [
+      '/public/IMG_8348.jpg',
+      '/public/mic 2.jpg'
+    ],
+    description: "Шторний матеріал мікровелюр. Колір бєжевий, максимальна висота 2,90м. Продаємо на метраж або шиємо під індивідуальні розміри.",
+    material: "Мікровелюр",
+    dimensions: "Ширина: 150 см, Висота: 270 см",
+    care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
+    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    inStock: true,
+    isFeatured: true,
+    sizeVariants: [
+      { size: "150x250 см", price: 1199, inStock: true },
+      { size: "200x250 см", price: 1299, inStock: true },
+      { size: "300x250 см", price: 1499, inStock: true },
+      { size: "400x250 см", price: 1899, inStock: false }
+    ]
+  },
+  {
+    id: 12,
+    name: "Мікровелюр",
+    price: 1299,
+    category: 'curtains',
+    subcategory: 'Мікровелюр',
+    images: [
+      '/public/g1.png',
+      '/public/g2.png'
+    ],
+    description: "Шторний матеріал мікровелюр. Колір графітовий, максимальна висота 2,90м. Продаємо на метраж або шиємо під індивідуальні розміри.",
+    material: "Мікровелюр",
+    dimensions: "Ширина: 150 см, Висота: 270 см",
+    care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
+    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    inStock: true,
+    
+    sizeVariants: [
+      { size: "150x250 см", price: 1199, inStock: true },
+      { size: "200x250 см", price: 1299, inStock: true },
+      { size: "300x250 см", price: 1499, inStock: true },
+      { size: "400x250 см", price: 1899, inStock: false }
+    ]
+  },
+  {
+    id: 13,
+    name: "Тюль матеріал фатин",
     price: 799,
     category: 'tulle',
-    subcategory: 'Шатін',
-    images: [
-      'https://images.unsplash.com/photo-1513161455079-7dc1de15ef3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1596162954151-cdcb4c0f70ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+    subcategory: 'Фатин',
+    images: [      
+      '/public/1-1-1.jpeg',
+      '/public/IMG_0870.PNG'
     ],
     description: "Тюль 'Ніжність' створений для тих, хто цінує легкість і витонченість. Напівпрозора тканина м'яко розсіює сонячне світло, створюючи затишну атмосферу в приміщенні.",
     material: "100% поліестер",
@@ -80,18 +344,20 @@ export const getProducts = (): Product[] => [
       { size: "500x260 см", price: 1199, inStock: true }
     ]
   },
+  
   {
-    id: 3,
-    name: "Карниз 'Модерн'",
-    price: 599,
+    id: 14,
+    name: "Широка стрічка'",
+    price: 15,
     category: 'accessories',
     images: [
-      'https://images.unsplash.com/photo-1575414003553-1d9824670d12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+      '/public/тасьма.jpg',
+      '/public/тасьма2.png'
     ],
-    description: "Сучасний карниз з мінімалістичним дизайном. Ідеально підходить для створення легкого і стильного образу в інтер'єрі.",
-    material: "Алюміній з матовим покриттям",
-    dimensions: "Довжина: 200 см, Діаметр: 2.5 см",
-    features: ["Легкий монтаж", "Витримує до 15 кг", "Безшумне ковзання"],
+    description: "Шторна стрічка використовується для встановлення та пошиття гардин. Тесьма має петлі, на які здійснюється підвішування тюлі або гардини до карниза на відповідні гачки. Пришивається по всій ширині тюлі..",
+    material: "Тесьма виготовлена ​​з непрозорого текстилю.",
+    dimensions: "6 см (ХБ)",
+    features: ["6 см (ХБ)", "Підходить для штор та гардин з будь-яких матеріалів.", "Країна виробництва	Туреччина"],
     inStock: true,
     sizeVariants: [
       { size: "150 см", price: 499, inStock: true },
@@ -101,14 +367,14 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 4,
-    name: "Оксамитові штори 'Імперіал'",
+    id: 16,
+    name: "Тюль матеріал фатин",
     price: 1599,
-    category: 'curtains',
-    subcategory: 'Преміум',
+    category: 'tulle',
+    subcategory: 'Фатин',
     images: [
-      'https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+      '/public/IMG_0871.jpg',
+      '/public/IMG_9584.jpg'
     ],
     description: "Розкішні оксамитові штори 'Імперіал' - втілення вишуканості та комфорту. Щільна тканина забезпечує повне затемнення приміщення, а багата текстура додає інтер'єру розкішного вигляду.",
     material: "100% бавовняний оксамит",
@@ -125,13 +391,226 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 5,
-    name: "Вишитий тюль 'Флора'",
+    id: 15,
+    name: "Тюль матеріал фатин",
+    price: 799,
+    category: 'tulle',
+    subcategory: 'Фатин',
+    images: [      
+      '/public/IMG_0869-transformed.png',
+      '/public/IMG_0870.PNG'
+    ],
+    description: "Тюль 'Ніжність' створений для тих, хто цінує легкість і витонченість. Напівпрозора тканина м'яко розсіює сонячне світло, створюючи затишну атмосферу в приміщенні.",
+    material: "100% поліестер",
+    dimensions: "Ширина: 300 см, Висота: 270 см",
+    care: "Машинне прання при 30°C, не використовувати відбілювач.",
+    features: ["Легке драпірування", "Стійкість до вигорання", "Гіпоалергенний матеріал"],
+    inStock: true,
+    sizeVariants: [
+      { size: "200x260 см", price: 699, inStock: true },
+      { size: "300x260 см", price: 799, inStock: true },
+      { size: "400x260 см", price: 999, inStock: true },
+      { size: "500x260 см", price: 1199, inStock: true }
+    ]
+  },
+  {
+    id: 17,
+    name: "Жаккард під мармур",
     price: 1099,
     category: 'tulle',
     subcategory: 'Жаккард',
     images: [
-      'https://images.unsplash.com/photo-1574879948818-1cfda7aa5b1a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+      '/public/IMG_0700.jpeg',
+      '/public/IMG_0661.jpg',
+      '/public/video.mov'
+    ],
+    description: "Елегантний тюль з вишитим квітковим орнаментом. Делікатна вишивка надає виробу витонченості та унікальності.",
+    material: "Поліестер з вишивкою",
+    dimensions: "Ширина: 300 см, Висота: 260 см",
+    care: "Делікатне прання при 30°C, не викручувати",
+    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    inStock: true,
+    isNew: true,
+    
+    sizeVariants: [
+      { size: "200x260 см", price: 899, inStock: true },
+      { size: "300x260 см", price: 1099, inStock: true },
+      { size: "400x260 см", price: 1399, inStock: true },
+      { size: "500x260 см", price: 1699, inStock: false }
+    ]
+  },
+  {
+    id: 18,
+    name: "Жаккард",
+    price: 1099,
+    category: 'tulle',
+    subcategory: 'Жаккард',
+    images: [
+      '/public/Жакардновий 1.png',
+      '/public/IMG_0978.jpg'
+    ],
+    description: "Елегантний тюль з вишитим квітковим орнаментом. Делікатна вишивка надає виробу витонченості та унікальності.",
+    material: "Поліестер з вишивкою",
+    dimensions: "Ширина: 300 см, Висота: 260 см",
+    care: "Делікатне прання при 30°C, не викручувати",
+    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    inStock: true,
+    
+    sizeVariants: [
+      { size: "200x260 см", price: 899, inStock: true },
+      { size: "300x260 см", price: 1099, inStock: true },
+      { size: "400x260 см", price: 1399, inStock: true },
+      { size: "500x260 см", price: 1699, inStock: false }
+    ]
+  },
+  {
+    id: 19,
+    name: "Жаккард",
+    price: 1099,
+    category: 'tulle',
+    subcategory: 'Жаккард',
+    images: [
+      '/public/10 2.JPG',
+      '/public/IMG_0451.jpg'
+    ],
+    description: "Елегантний тюль з вишитим квітковим орнаментом. Делікатна вишивка надає виробу витонченості та унікальності.",
+    material: "Поліестер з вишивкою",
+    dimensions: "Ширина: 300 см, Висота: 260 см",
+    care: "Делікатне прання при 30°C, не викручувати",
+    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    inStock: true,
+    
+    sizeVariants: [
+      { size: "200x260 см", price: 899, inStock: true },
+      { size: "300x260 см", price: 1099, inStock: true },
+      { size: "400x260 см", price: 1399, inStock: true },
+      { size: "500x260 см", price: 1699, inStock: false }
+    ]
+  },
+  {
+    id: 20,
+    name: "Жаккард",
+    price: 1099,
+    category: 'tulle',
+    subcategory: 'Жаккард',
+    images: [
+      '/public/IMG_1066.jpg'
+    ],
+    description: "Елегантний тюль з вишитим квітковим орнаментом. Делікатна вишивка надає виробу витонченості та унікальності.",
+    material: "Поліестер з вишивкою",
+    dimensions: "Ширина: 300 см, Висота: 260 см",
+    care: "Делікатне прання при 30°C, не викручувати",
+    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    inStock: true,
+    
+    sizeVariants: [
+      { size: "200x260 см", price: 899, inStock: true },
+      { size: "300x260 см", price: 1099, inStock: true },
+      { size: "400x260 см", price: 1399, inStock: true },
+      { size: "500x260 см", price: 1699, inStock: false }
+    ]
+  },
+  {
+    id: 21,
+    name: "Льон-Бамбук",
+    price: 1099,
+    category: 'tulle',
+    subcategory: 'Льон-Бамбук',
+    images: [
+      '/public/4 2.JPG'
+    ],
+    description: "Елегантний тюль з вишитим квітковим орнаментом. Делікатна вишивка надає виробу витонченості та унікальності.",
+    material: "Поліестер з вишивкою",
+    dimensions: "Ширина: 300 см, Висота: 260 см",
+    care: "Делікатне прання при 30°C, не викручувати",
+    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    inStock: true,
+    
+    sizeVariants: [
+      { size: "200x260 см", price: 899, inStock: true },
+      { size: "300x260 см", price: 1099, inStock: true },
+      { size: "400x260 см", price: 1399, inStock: true },
+      { size: "500x260 см", price: 1699, inStock: false }
+    ]
+  },
+  {
+    id: 22,
+    name: "Льон-Бамбук",
+    price: 1099,
+    category: 'tulle',
+    subcategory: 'Льон-Бамбук',
+    images: [
+      '/public/0710.jpg'
+    ],
+    description: "Елегантний тюль з вишитим квітковим орнаментом. Делікатна вишивка надає виробу витонченості та унікальності.",
+    material: "Поліестер з вишивкою",
+    dimensions: "Ширина: 300 см, Висота: 260 см",
+    care: "Делікатне прання при 30°C, не викручувати",
+    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    inStock: true,
+    
+    sizeVariants: [
+      { size: "200x260 см", price: 899, inStock: true },
+      { size: "300x260 см", price: 1099, inStock: true },
+      { size: "400x260 см", price: 1399, inStock: true },
+      { size: "500x260 см", price: 1699, inStock: false }
+    ]
+  },
+  {
+    id: 23,
+    name: "Льон-Бамбук",
+    price: 1099,
+    category: 'tulle',
+    subcategory: 'Льон-Бамбук',
+    images: [
+      '/public/3-3 копія.jpg',
+      '/public/26(1).jpg'
+    ],
+    description: "Елегантний тюль з вишитим квітковим орнаментом. Делікатна вишивка надає виробу витонченості та унікальності.",
+    material: "Поліестер з вишивкою",
+    dimensions: "Ширина: 300 см, Висота: 260 см",
+    care: "Делікатне прання при 30°C, не викручувати",
+    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    inStock: true,
+    
+    sizeVariants: [
+      { size: "200x260 см", price: 899, inStock: true },
+      { size: "300x260 см", price: 1099, inStock: true },
+      { size: "400x260 см", price: 1399, inStock: true },
+      { size: "500x260 см", price: 1699, inStock: false }
+    ]
+  },
+  {
+    id: 24,
+    name: "Льон-Бамбук",
+    price: 1099,
+    category: 'tulle',
+    subcategory: 'Льон-Бамбук',
+    images: [
+      '/public/IMG_1060.jpg'
+    ],
+    description: "Елегантний тюль з вишитим квітковим орнаментом. Делікатна вишивка надає виробу витонченості та унікальності.",
+    material: "Поліестер з вишивкою",
+    dimensions: "Ширина: 300 см, Висота: 260 см",
+    care: "Делікатне прання при 30°C, не викручувати",
+    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    inStock: true,
+    
+    sizeVariants: [
+      { size: "200x260 см", price: 899, inStock: true },
+      { size: "300x260 см", price: 1099, inStock: true },
+      { size: "400x260 см", price: 1399, inStock: true },
+      { size: "500x260 см", price: 1699, inStock: false }
+    ]
+  },
+  {
+    id: 25,
+    name: "Льон-Бамбук",
+    price: 1099,
+    category: 'tulle',
+    subcategory: 'Льон-Бамбук',
+    images: [
+      '/public/8 2.JPG'
     ],
     description: "Елегантний тюль з вишитим квітковим орнаментом. Делікатна вишивка надає виробу витонченості та унікальності.",
     material: "Поліестер з вишивкою",
@@ -148,16 +627,115 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 6,
-    name: "Магнітні зажими для штор",
-    price: 299,
+    id: 26,
+    name: "Шифон",
+    price: 1099,
+    category: 'tulle',
+    subcategory: 'Шифон',
+    images: [
+      '/public/11.jpg',
+      '/public/IMG_6730.jpg'
+    ],
+    description: "Елегантний тюль з вишитим квітковим орнаментом. Делікатна вишивка надає виробу витонченості та унікальності.",
+    material: "Поліестер з вишивкою",
+    dimensions: "Ширина: 300 см, Висота: 260 см",
+    care: "Делікатне прання при 30°C, не викручувати",
+    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    inStock: true,
+    
+    sizeVariants: [
+      { size: "200x260 см", price: 899, inStock: true },
+      { size: "300x260 см", price: 1099, inStock: true },
+      { size: "400x260 см", price: 1399, inStock: true },
+      { size: "500x260 см", price: 1699, inStock: false }
+    ]
+  },
+  {
+    id: 27,
+    name: "Льон-Бамбук",
+    price: 1099,
+    category: 'tulle',
+    subcategory: 'Льон-Бамбук',
+    images: [
+      '/public/IMG301.JPG',
+      '/public/IMG_9887.jpg',
+      '/public/IMG_9980.jpg'
+    ],
+    description: "Елегантний тюль з вишитим квітковим орнаментом. Делікатна вишивка надає виробу витонченості та унікальності.",
+    material: "Поліестер з вишивкою",
+    dimensions: "Ширина: 300 см, Висота: 260 см",
+    care: "Делікатне прання при 30°C, не викручувати",
+    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    inStock: true,
+    isFeatured: true,
+    sizeVariants: [
+      { size: "200x260 см", price: 899, inStock: true },
+      { size: "300x260 см", price: 1099, inStock: true },
+      { size: "400x260 см", price: 1399, inStock: true },
+      { size: "500x260 см", price: 1699, inStock: false }
+    ]
+  },
+  {
+    id: 28,
+    name: "Льон",
+    price: 1099,
+    category: 'tulle',
+    subcategory: 'Льон',
+    images: [
+      '/public/льон1.JPG',
+      '/public/льон2.jpg',
+      '/public/IMG_0420.JPG'
+    ],
+    description: "Елегантний тюль з вишитим квітковим орнаментом. Делікатна вишивка надає виробу витонченості та унікальності.",
+    material: "Поліестер з вишивкою",
+    dimensions: "Ширина: 300 см, Висота: 260 см",
+    care: "Делікатне прання при 30°C, не викручувати",
+    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    inStock: true,
+    
+    sizeVariants: [
+      { size: "200x260 см", price: 899, inStock: true },
+      { size: "300x260 см", price: 1099, inStock: true },
+      { size: "400x260 см", price: 1399, inStock: true },
+      { size: "500x260 см", price: 1699, inStock: false }
+    ]
+  },
+  {
+    id: 29,
+    name: "Грек-сітка",
+    price: 1099,
+    category: 'tulle',
+    subcategory: 'Грек-сітка',
+    images: [
+      '/public/IMG_8158.jpg',
+      '/public/IMG_8231.jpg'
+    ],
+    description: "Елегантний тюль з вишитим квітковим орнаментом. Делікатна вишивка надає виробу витонченості та унікальності.",
+    material: "Поліестер з вишивкою",
+    dimensions: "Ширина: 300 см, Висота: 260 см",
+    care: "Делікатне прання при 30°C, не викручувати",
+    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    inStock: true,
+    
+    sizeVariants: [
+      { size: "200x260 см", price: 899, inStock: true },
+      { size: "300x260 см", price: 1099, inStock: true },
+      { size: "400x260 см", price: 1399, inStock: true },
+      { size: "500x260 см", price: 1699, inStock: false }
+    ]
+  },
+  {
+    id: 180,
+    name: "Вузька стрічка",
+    price: 15,
     category: 'accessories',
     images: [
-      'https://images.unsplash.com/photo-1601628828688-632f38a5a7d0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+      '/public/вузька 1.png',
+      '/public/вузька 2.png'
     ],
-    description: "Стильні магнітні зажими для елегантної фіксації штор. Доповнять інтер'єр і зроблять його більш вишуканим.",
-    material: "Метал з матовим покриттям",
-    features: ["Потужні магніти", "Не пошкоджують тканину", "Легке регулювання"],
+    description: "Стрічка використовується для карнизів закритого типу, для карнизів, встановлених у стельовій ніші, якщо використовуються ламбрекени. Вузька шторна стрічка має винятково практичну функцію - кріплення штори до карнизу. Ця модель стрічки передбачає кріплення на гачки. Тесьма нашивається на верхній край штори по всій ширині, без урахування довжини карниза.",
+    material: "Вузька стрічка",
+    features: ["Тесьма виготовлена ​​з непрозорого текстилю.", "2,5 см (ХБ)", "Легке регулювання, Підходить для штор та гардин з будь-яких матеріалів."],
     inStock: true,
     isNew: true,
     sizeVariants: [
@@ -168,60 +746,18 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 7,
-    name: "Льняні штори 'Прованс'",
-    price: 1199,
-    category: 'curtains',
-    subcategory: 'Натуральні',
-    images: [
-      'https://images.unsplash.com/photo-1615529162924-f8605388461d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
-    ],
-    description: "Натуральні льняні штори в стилі Прованс. Екологічно чистий матеріал, який створює атмосферу затишку та спокою.",
-    material: "100% льон",
-    dimensions: "Ширина: 145 см, Висота: 270 см",
-    care: "Прання при 40°C, можливо легке зсідання",
-    features: ["Екологічно чисті", "Натуральне повітропроникнення", "Антистатичні"],
-    inStock: true,
-    sizeVariants: [
-      { size: "145x250 см", price: 1099, inStock: true },
-      { size: "145x270 см", price: 1199, inStock: true },
-      { size: "290x250 см", price: 1899, inStock: true },
-      { size: "290x270 см", price: 1999, inStock: true }
-    ]
-  },
-  {
-    id: 8,
-    name: "Легкий тюль 'Хмаринка'",
-    price: 699,
-    category: 'tulle',
-    subcategory: 'Льон',
-    images: [
-      'https://images.unsplash.com/photo-1543377950-dd5c1416db32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
-    ],
-    description: "Надзвичайно легкий і повітряний тюль, який створює ефект 'хмаринки' у вашому інтер'єрі. Ідеально підходить для створення романтичної атмосфери.",
-    material: "Ультратонкий поліестер",
-    dimensions: "Ширина: 300 см, Висота: 280 см",
-    care: "Делікатне прання при 30°C",
-    features: ["Ультралегкий", "Висока повітропроникність", "Ефект 'хмаринки'"],
-    inStock: true,
-    sizeVariants: [
-      { size: "300x250 см", price: 649, inStock: true },
-      { size: "300x280 см", price: 699, inStock: true },
-      { size: "400x250 см", price: 849, inStock: true },
-      { size: "400x280 см", price: 899, inStock: true }
-    ]
-  },
-  {
-    id: 9,
-    name: "Комплект тримачів для штор",
-    price: 399,
+    id: 200,
+    name: "Стрічка кріплення на трубу",
+    price: 45,
     category: 'accessories',
     images: [
-      'https://images.unsplash.com/photo-1631509493202-3b0d40ce7c67?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+      '/public/стірчка 1.JPG',
+      '/public/стрічка 2.JPG',
+      '/public/стірчка 3.jpg'
     ],
-    description: "Елегантні тримачі для штор зі стильним дизайном. Допоможуть красиво зафіксувати штори та надати інтер'єру завершеності.",
-    material: "Метал з декоративними елементами",
-    features: ["Легкий монтаж", "Стильний дизайн", "Універсальне кріплення"],
+    description: "Дана тасьма прозора, шириною 10см. Вона не має ниток для стягування, але є петлі шириною 4см які розташовані через 20см. Петлі одягаються на трубчатий карниз і формують глибокі, рівні складки на шторі чи гардині. Ця тасьма дозволить підкреслити фактуру та малюнок тканини і допоможе без зайвих витрат зробити вигляд готового виробу актуальним та стильним.",
+    material: "Тесьма, кріплення на карниз 6 см (ХБ)",
+    features: ["Легкий монтаж", "10 см", "Країна виробництва	Туреччина"],
     inStock: true,
     sizeVariants: [
       { size: "Класичний", price: 399, inStock: true },
@@ -230,119 +766,29 @@ export const getProducts = (): Product[] => [
       { size: "Преміум", price: 599, inStock: true }
     ]
   },
-  {
-    id: 10,
-    name: "Штори блекаут 'Місячна ніч'",
-    price: 1399,
-    category: 'curtains',
-    subcategory: 'Блекаут',
-    images: [
-      'https://images.unsplash.com/photo-1605774337664-7a846e9cdf17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
-    ],
-    description: "Штори з ефектом повного затемнення 'Місячна ніч'. Ідеальне рішення для спальні або домашнього кінотеатру.",
-    material: "Трьохшаровий блекаут",
-    dimensions: "Ширина: 150 см, Висота: 270 см",
-    care: "Машинне прання при 30°C, прасування при низькій температурі",
-    features: ["100% затемнення", "Звукоізоляція", "Енергозбереження"],
-    inStock: true,
-    isFeatured: true,
-    sizeVariants: [
-      { size: "150x250 см", price: 1299, inStock: true },
-      { size: "150x270 см", price: 1399, inStock: true },
-      { size: "200x250 см", price: 1599, inStock: true },
-      { size: "200x270 см", price: 1699, inStock: false }
-    ]
-  },
-  {
-    id: 11,
-    name: "Тюль 'Ранковий туман'",
-    price: 899,
-    category: 'tulle',
-    subcategory: 'Шатін',
-    images: [
-      'https://images.unsplash.com/photo-1531835551805-16d864c8d311?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
-    ],
-    description: "Тюль 'Ранковий туман' з тканини шатін створює м'який, розсіяний світловий ефект. Ідеально підходить для спальні чи вітальні, де потрібна атмосфера затишку.",
-    material: "Шатін (суміш бавовни та поліестеру)",
-    dimensions: "Ширина: 290 см, Висота: 250 см",
-    care: "Делікатне прання при 30°C, прасування при низькій температурі",
-    features: ["М'яке розсіювання світла", "Елегантний блиск", "Висока міцність"],
-    inStock: true,
-    sizeVariants: [
-      { size: "290x250 см", price: 899, inStock: true },
-      { size: "290x270 см", price: 949, inStock: true },
-      { size: "400x250 см", price: 1099, inStock: true },
-      { size: "400x270 см", price: 1149, inStock: false }
-    ]
-  },
-  {
-    id: 12,
-    name: "Тюль 'Натуральний бриз'",
-    price: 1199,
-    category: 'tulle',
-    subcategory: 'Льон',
-    images: [
-      'https://images.unsplash.com/photo-1585421514738-01798e348b17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
-    ],
-    description: "Легкий льняний тюль 'Натуральний бриз' створений для цінителів екологічних матеріалів. Пропускає повітря та створює м'яке природне освітлення.",
-    material: "100% льон",
-    dimensions: "Ширина: 280 см, Висота: 260 см",
-    care: "Прання при 40°C, можливе незначне зсідання",
-    features: ["Екологічно чистий", "Висока повітропроникність", "Антистатичні властивості"],
-    inStock: true,
-    isNew: true,
-    sizeVariants: [
-      { size: "280x250 см", price: 1099, inStock: true },
-      { size: "280x260 см", price: 1199, inStock: true },
-      { size: "300x250 см", price: 1249, inStock: true },
-      { size: "300x260 см", price: 1299, inStock: true }
-    ]
-  },
-  {
-    id: 13,
-    name: "Тюль 'Королівський візерунок'",
-    price: 1499,
-    category: 'tulle',
-    subcategory: 'Жаккард',
-    images: [
-      'https://images.unsplash.com/photo-1540730930991-a9086203f751?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
-    ],
-    description: "Розкішний жаккардовий тюль з вишуканим візерунком. Ідеальний вибір для оформлення класичних інтер'єрів та створення атмосфери розкоші.",
-    material: "Жаккардовий поліестер",
-    dimensions: "Ширина: 300 см, Висота: 270 см",
-    care: "Тільки хімчистка",
-    features: ["Вишуканий візерунок", "Висока щільність", "Стійкий до вигорання"],
-    inStock: true,
-    isFeatured: true,
-    sizeVariants: [
-      { size: "300x250 см", price: 1399, inStock: true },
-      { size: "300x270 см", price: 1499, inStock: true },
-      { size: "400x250 см", price: 1699, inStock: true },
-      { size: "400x270 см", price: 1899, inStock: true }
-    ]
-  }
+  
 ];
 
 export const getCategories = (): Category[] => [
   {
     id: "curtains",
     name: "Штори",
-    description: "Широкий вибір штор різних стилів та матеріалів",
-    imageUrl: "https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
+    description: "Елегантні штори",
+    imageUrl: "/public/baner 2.jpg",
     featured: true
   },
   {
     id: "tulle",
     name: "Тюль",
     description: "Легкі та повітряні тюлі для сучасного інтер'єру",
-    imageUrl: "https://images.unsplash.com/photo-1513161455079-7dc1de15ef3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/public/категорія тюль.jpg",
     featured: true
   },
   {
     id: "accessories",
     name: "Аксесуари",
-    description: "Карнизи, зажими та інші аксесуари для штор і тюлів",
-    imageUrl: "https://images.unsplash.com/photo-1575414003553-1d9824670d12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
+    description: "Аксесуари для штор і тюлів",
+    imageUrl: "/public/тасьма.jpg",
     featured: true
   }
 ];

@@ -24,16 +24,16 @@ const Index = () => {
         {/* Hero Section */}
         <section className="relative h-[80vh] min-h-[600px] w-full overflow-hidden">
           <img
-            src="https://images.unsplash.com/photo-1605774337664-7a846e9cdf17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80"
+            src="/public/baner.jpg"
             alt="Elegant living room with beautiful curtains"
             className="absolute inset-0 h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/70 to-background/30" />
+          <div className="absolute inset-0 " />
           <div className="container relative h-full px-4 md:px-6 flex items-center">
             <div className="max-w-lg space-y-6 animate-fade-in">
               <div className="space-y-2">
                 <h1 className="text-4xl font-serif font-medium tracking-tight sm:text-5xl md:text-6xl">
-                  Ідеальні штори для вашої оселі
+                  Тюль і штори для вашої оселі
                 </h1>
                 <p className="text-lg text-muted-foreground md:text-xl">
                   Перетворіть ваш простір за допомогою наших елегантних штор та тюлів
@@ -80,24 +80,23 @@ const Index = () => {
               Чому обирають нас
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-card rounded-lg p-6 text-center space-y-4 shadow-sm transition-all hover:shadow-md">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-primary"
-                  >
-                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                    <path d="M3.27 6.96 12 12.01l8.73-5.05"></path>
-                    <path d="M12 22.08V12"></path>
-                  </svg>
+            <div className="bg-card rounded-lg p-6 text-center space-y-4 shadow-sm transition-all hover:shadow-md">
+            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+              <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+                strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-primary"
+               >
+                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                <path d="M2 12v10l10-5 10 5V12l-10-5-10 5z" />
+                </svg>
                 </div>
                 <h3 className="text-lg font-medium">Висока якість</h3>
                 <p className="text-muted-foreground">

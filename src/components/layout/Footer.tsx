@@ -74,17 +74,12 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/delivery" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Доставка та оплата
-                </Link>
+              <Link to="/paymentdelivery" className="text-muted-foreground hover:text-foreground transition-colors">
+              Доставка та оплата
+            </Link>
               </li>
               <li>
-                <Link to="/returns" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Повернення
-                </Link>
-              </li>
-              <li>
-                <Link to="/privacy-policy" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">
                   Політика конфіденційності
                 </Link>
               </li>
@@ -104,7 +99,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start">
                 <MapPin className="mr-2 h-5 w-5 shrink-0 text-muted-foreground" />
-                <span>м. Київ, вул. Хрещатик, 1</span>
+                <span>м. Львів, вул. </span>
               </li>
             </ul>
           </div>

@@ -111,18 +111,25 @@ const Category = () => {
       <Navbar />
       <main className="flex-grow pt-16">
         {/* Category Header */}
-        <section className="relative py-24 mb-8 bg-secondary/30">
-          <div className="container px-4 md:px-6">
-            <h1 className="text-3xl font-serif font-medium md:text-4xl text-center">
-              {category?.name || getCategoryTitle()}
-            </h1>
-            {category?.description && (
-              <p className="mt-4 max-w-2xl mx-auto text-center text-muted-foreground">
-                {category.description}
-              </p>
-            )}
-          </div>
-        </section>
+        <section 
+      className="relative py-24 mb-8 bg-secondary/30 bg-cover bg-center" 
+      style={{ backgroundImage: `url('/public/baner.jpg')` }}
+    >
+      <div className="container px-4 md:px-6 relative z-10 text-center">
+        <h1 className="text-3xl font-serif font-medium md:text-4xl text-white">
+          {category?.name || getCategoryTitle()}
+        </h1>
+        {category?.description && (
+          <p className="mt-4 max-w-2xl mx-auto text-white/80">
+            {category.description}
+          </p>
+        )}
+      </div>
+      <div className="absolute inset-0 bg-black/40"></div> {/* Напівпрозорий оверлей */}
+    </section>
+
+
+
 
         <div className="container px-4 md:px-6 pb-16">
           <div className="flex flex-col lg:flex-row gap-8">

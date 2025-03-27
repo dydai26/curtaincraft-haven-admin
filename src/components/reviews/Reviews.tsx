@@ -1,6 +1,7 @@
+// src/components/reviews/Reviews.tsx
 
-import React, { useState } from 'react';
-import { Star, MessageSquare, User } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
@@ -17,117 +18,70 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '@/hooks/use-toast';
+import axios from 'axios'; // для запитів до API
+import StarRating from './StarRating'; // імпортуємо StarRating
 
-// Sample review data
-const initialReviews = [
-  {
-    id: 1,
-    name: 'Марія Петренко',
-    rating: 5,
-    date: '15.03.2023',
-    text: 'Замовляла штори у вітальню, якість просто неймовірна! Тканина приємна на дотик, колір повністю відповідає фото. Дуже задоволена покупкою!',
-  },
-  {
-    id: 2,
-    name: 'Іван Ковальчук',
-    rating: 4,
-    date: '02.02.2023',
-    text: 'Купував тюль для спальні. Доставка швидка, якість чудова. Єдиний мінус - трохи відрізнявся відтінок від фото, але це не критично. Рекомендую!',
-  },
-  {
-    id: 3,
-    name: 'Олена Сидоренко',
-    rating: 5,
-    date: '20.01.2023',
-    text: 'Дуже задоволена якістю штор та обслуговуванням. Менеджер допоміг з вибором, все швидко доставили. Буду рекомендувати знайомим!',
-  },
-];
-
+// Визначення схеми валідації через Zod
 const formSchema = z.object({
-  name: z.string().min(2, { message: "Ім'я повинно містити принаймні 2 символи" }),
-  rating: z.number().min(1, { message: "Оберіть оцінку" }).max(5),
-  text: z.string().min(10, { message: "Відгук повинен містити принаймні 10 символів" }),
+  name: z.string().min(1, 'Введіть ваше ім’я'),
+  rating: z.number().min(1, 'Оцінка не може бути менше 1').max(5, 'Оцінка не може бути більше 5'),
+  text: z.string().min(5, 'Відгук має містити хоча б 5 символів'),
 });
 
-const StarRating = ({ 
-  rating, 
-  editable = false, 
-  onChange 
-}: { 
-  rating: number; 
-  editable?: boolean;
-  onChange?: (value: number) => void;
-}) => {
-  const [hoverRating, setHoverRating] = useState(0);
-
-  return (
-    <div className="flex">
-      {[1, 2, 3, 4, 5].map((value) => (
-        <Star
-          key={value}
-          className={`h-5 w-5 ${
-            (editable ? (hoverRating || rating) : rating) >= value
-              ? 'fill-primary text-primary'
-              : 'text-muted-foreground'
-          } ${editable ? 'cursor-pointer' : ''}`}
-          onMouseEnter={editable ? () => setHoverRating(value) : undefined}
-          onMouseLeave={editable ? () => setHoverRating(0) : undefined}
-          onClick={editable && onChange ? () => onChange(value) : undefined}
-        />
-      ))}
-    </div>
-  );
-};
-
-const ReviewCard = ({ review }: { review: typeof initialReviews[0] }) => (
-  <Card className="mb-4">
-    <CardContent className="p-6">
-      <div className="flex items-center justify-between mb-2">
-        <div className="flex items-center gap-2">
-          <div className="bg-primary/10 rounded-full p-2">
-            <User className="h-5 w-5 text-primary" />
-          </div>
-          <span className="font-medium">{review.name}</span>
-        </div>
-        <span className="text-sm text-muted-foreground">{review.date}</span>
-      </div>
-      <StarRating rating={review.rating} />
-      <p className="mt-3 text-muted-foreground">{review.text}</p>
-    </CardContent>
-  </Card>
-);
-
 const Reviews = () => {
-  const [reviews, setReviews] = useState(initialReviews);
+  const [reviews, setReviews] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const { toast } = useToast();
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      name: '',
       rating: 0,
-      text: "",
+      text: '',
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    const newReview = {
-      id: reviews.length + 1,
-      name: values.name,
-      rating: values.rating,
-      date: new Date().toLocaleDateString('uk-UA'),
-      text: values.text,
+  // Завантаження відгуків з API
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await axios.get('/api/reviews', {
+          params: { productId: 'your-product-id' }, // Тут вказуєте productId
+        });
+        setReviews(response.data);
+      } catch (error) {
+        console.error('Помилка завантаження відгуків:', error);
+      }
     };
-    
-    setReviews([newReview, ...reviews]);
-    setShowForm(false);
-    form.reset();
-    
-    toast({
-      title: "Дякуємо за відгук!",
-      description: "Ваш відгук успішно додано.",
-    });
+
+    fetchReviews();
+  }, []);
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const newReview = {
+      productId: 'your-product-id', // ID продукту, для якого залишаються відгуки
+      reviewText: values.text,
+      userName: values.name,
+    };
+
+    try {
+      const response = await axios.post('/api/reviews', newReview);
+      setReviews([response.data, ...reviews]);
+      setShowForm(false);
+      form.reset();
+      
+      toast({
+        title: 'Дякуємо за відгук!',
+        description: 'Ваш відгук успішно додано.',
+      });
+    } catch (error) {
+      toast({
+        title: 'Помилка!',
+        description: 'Не вдалося додати відгук.',
+        variant: 'destructive',
+      });
+    }
   };
 
   return (
@@ -140,9 +94,9 @@ const Reviews = () => {
           </h2>
           <Button 
             onClick={() => setShowForm(!showForm)} 
-            variant={showForm ? "outline" : "default"}
+            variant={showForm ? 'outline' : 'default'}
           >
-            {showForm ? "Скасувати" : "Залишити відгук"}
+            {showForm ? 'Скасувати' : 'Залишити відгук'}
           </Button>
         </div>
         
@@ -213,7 +167,10 @@ const Reviews = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {reviews.map((review) => (
-            <ReviewCard key={review.id} review={review} />
+            <div key={review.id} className="card">
+              <h3>{review.userName}</h3>
+              <p>{review.reviewText}</p>
+            </div>
           ))}
         </div>
       </div>
