@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { ShoppingBag, Menu, X, Search, UserCog } from 'lucide-react'; // Додано іконку "Адмін панель"
+import { ShoppingBag, Menu, X, Search, UserCog } from 'lucide-react'; // Іконка "Адмін панель"
 import { useCart } from '@/context/CartContext';
 import { Button } from '@/components/ui/button';
 import { getCategories } from '@/lib/data';
@@ -13,7 +12,6 @@ const Navbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const { totalItems } = useCart();
-  const { isAdmin } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const categories = getCategories();
@@ -55,25 +53,23 @@ const Navbar = () => {
           </Link>
 
           <nav className="hidden md:flex items-center space-x-8">
-  <Link to="/" className="text-sm font-medium transition-colors hover:text-primary/80">
-    Головна
-  </Link>
-  {categories.map((category) => (
-    <Link
-      key={category.id}
-      to={`/category/${category.id}`}
-      className="text-sm font-medium transition-colors hover:text-primary/80"
-    >
-      {category.name}
-    </Link>
-  ))}
-  
-</nav>
-
+            <Link to="/" className="text-sm font-medium transition-colors hover:text-primary/80">
+              Головна
+            </Link>
+            {categories.map((category) => (
+              <Link
+                key={category.id}
+                to={`/category/${category.id}`}
+                className="text-sm font-medium transition-colors hover:text-primary/80"
+              >
+                {category.name}
+              </Link>
+            ))}
+          </nav>
 
           <div className="flex items-center space-x-3">
             {/* Пошук */}
-            <div className="relative">
+            <div className="relative hidden md:block">
               {isSearchOpen ? (
                 <div className="flex items-center border rounded-md px-2 py-0 bg-white shadow-sm">
                   <Search className="h-4 w-4 text-muted-foreground" />
@@ -99,7 +95,7 @@ const Navbar = () => {
             </div>
 
             {/* Кошик */}
-            <Link to="/cart" className="relative">
+            <Link to="/cart" className="relative hidden md:block">
               <Button variant="ghost" size="icon" className="button-hover">
                 <ShoppingBag className="h-5 w-5" />
                 {totalItems > 0 && (
@@ -111,16 +107,13 @@ const Navbar = () => {
               </Button>
             </Link>
 
-            {/* Адмін панель */}
-            {isAdmin && (
-              <Link
-                to="/admin"
-                className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary/80"
-              >
-                <UserCog className="h-5 w-5 text-primary" /> {/* Іконка адмін панелі */}
-                Адмін
-              </Link>
-            )}
+            {/* Іконка адмін панелі */}
+            <Link
+              to="/admin"
+              className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary/80 hidden md:flex"
+            >
+              <UserCog className="h-5 w-5 text-primary" /> {/* Іконка адмін панелі */}
+            </Link>
 
             {/* Мобільне меню */}
             <Button
@@ -153,25 +146,36 @@ const Navbar = () => {
               </Link>
             ))}
 
-            {isAdmin && (
-              <Link
-                to="/admin"
-                className="flex items-center gap-2 py-2 text-lg font-medium transition-colors hover:text-primary/80"
-              >
-                <UserCog className="h-6 w-6 text-primary" /> Адмін панель
-              </Link>
-            )}
+            {/* Іконка адмін панелі в мобільному меню */}
+            <Link
+              to="/admin"
+              className="flex items-center gap-2 py-2 text-lg font-medium transition-colors hover:text-primary/80"
+            >
+              <UserCog className="h-6 w-6 text-primary" />
+            </Link>
 
-            <div className="pt-2">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <input
-                  type="search"
-                  placeholder="Пошук..."
-                  className="w-full rounded-md border border-input bg-background py-2 pl-10 pr-4 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                />
-              </div>
+            {/* Пошук в мобільному меню */}
+            <div className="relative py-2">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <input
+                type="search"
+                placeholder="Пошук..."
+                className="w-full rounded-md border border-input bg-background py-2 pl-10 pr-4 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              />
             </div>
+
+            {/* Кошик в мобільному меню */}
+            <Link to="/cart" className="block py-2 text-lg font-medium transition-colors hover:text-primary/80">
+              <Button variant="ghost" size="icon" className="button-hover">
+                <ShoppingBag className="h-5 w-5" />
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-medium text-primary-foreground">
+                    {totalItems}
+                  </span>
+                )}
+                <span className="sr-only">Кошик</span>
+              </Button>
+            </Link>
           </div>
         </div>
       )}

@@ -1,6 +1,6 @@
 // src/components/reviews/Reviews.tsx
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -18,7 +18,6 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '@/hooks/use-toast';
-import axios from 'axios'; // для запитів до API
 import StarRating from './StarRating'; // імпортуємо StarRating
 
 // Визначення схеми валідації через Zod
@@ -29,8 +28,48 @@ const formSchema = z.object({
 });
 
 const Reviews = () => {
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState([
+    {
+      id: '1',
+      userName: 'Іван Іванов',
+      reviewText: 'Цей товар просто чудовий! Дуже задоволений якістю.',
+      rating: 5,
+    },
+    {
+      id: '2',
+      userName: 'Марія Петрівна',
+      reviewText: 'Товари супер! Якість відмінна, але трохи пізно доставили.',
+      rating: 4,
+    },
+    {
+      id: '3',
+      userName: 'Андрій Олексійович',
+      reviewText: 'Не зовсім задоволений, не відповідає опису на сайті.',
+      rating: 2,
+    },
+    {
+      id: '4',
+      userName: 'Олена Сергіївна',
+      reviewText: 'Прекрасна покупка! Рекомендую всім друзям!',
+      rating: 5,
+    },
+    {
+      id: '5',
+      userName: 'Дмитро Олександрович',
+      reviewText: 'Відмінний товар, не шкодую про покупку.',
+      rating: 4,
+    },
+    {
+      id: '6',
+      userName: 'Катерина Іванівна',
+      reviewText: 'Швидко доставили, товар відповідає опису.',
+      rating: 4,
+    },
+  ]);
+  
   const [showForm, setShowForm] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const reviewsPerPage = 3;
   const { toast } = useToast();
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -42,46 +81,34 @@ const Reviews = () => {
     },
   });
 
-  // Завантаження відгуків з API
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const response = await axios.get('/api/reviews', {
-          params: { productId: 'your-product-id' }, // Тут вказуєте productId
-        });
-        setReviews(response.data);
-      } catch (error) {
-        console.error('Помилка завантаження відгуків:', error);
-      }
-    };
-
-    fetchReviews();
-  }, []);
-
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const newReview = {
+      id: String(reviews.length + 1), // генеруємо ID для нового відгука
       productId: 'your-product-id', // ID продукту, для якого залишаються відгуки
       reviewText: values.text,
       userName: values.name,
+      rating: values.rating,
     };
 
-    try {
-      const response = await axios.post('/api/reviews', newReview);
-      setReviews([response.data, ...reviews]);
-      setShowForm(false);
-      form.reset();
-      
-      toast({
-        title: 'Дякуємо за відгук!',
-        description: 'Ваш відгук успішно додано.',
-      });
-    } catch (error) {
-      toast({
-        title: 'Помилка!',
-        description: 'Не вдалося додати відгук.',
-        variant: 'destructive',
-      });
-    }
+    setReviews([newReview, ...reviews]);
+    setShowForm(false);
+    form.reset();
+    
+    toast({
+      title: 'Дякуємо за відгук!',
+      description: 'Ваш відгук успішно додано.',
+    });
+  };
+
+  // Обчислення відгуків для поточної сторінки
+  const indexOfLastReview = currentPage * reviewsPerPage;
+  const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
+  const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview);
+
+  const totalPages = Math.ceil(reviews.length / reviewsPerPage);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -166,12 +193,40 @@ const Reviews = () => {
         )}
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {reviews.map((review) => (
-            <div key={review.id} className="card">
-              <h3>{review.userName}</h3>
+          {currentReviews.map((review) => (
+            <div key={review.id} className="bg-white p-6 shadow-lg rounded-lg">
+              <h3 className="text-xl font-semibold">{review.userName}</h3>
+              <StarRating rating={review.rating} editable={false} onChange={() => {}} />
               <p>{review.reviewText}</p>
             </div>
           ))}
+        </div>
+        
+        {/* Пагінація */}
+        <div className="flex justify-center mt-6">
+          <Button
+            disabled={currentPage === 1}
+            onClick={() => handlePageChange(currentPage - 1)}
+          >
+            Попередня
+          </Button>
+          <div className="flex gap-2 mx-4">
+            {[...Array(totalPages)].map((_, index) => (
+              <Button
+                key={index}
+                variant={currentPage === index + 1 ? 'default' : 'outline'}
+                onClick={() => handlePageChange(index + 1)}
+              >
+                {index + 1}
+              </Button>
+            ))}
+          </div>
+          <Button
+            disabled={currentPage === totalPages}
+            onClick={() => handlePageChange(currentPage + 1)}
+          >
+            Наступна
+          </Button>
         </div>
       </div>
     </section>
