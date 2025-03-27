@@ -1,1 +1,31 @@
+name: Deploy to FTP
 
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up FTP credentials
+      env:
+        FTP_SERVER: tz517836.ftp.tools
+        FTP_USERNAME: tz517836_ftp
+        FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        FTP_PATH: /home/tz517836/
+      run: |
+        echo "Setting up FTP credentials..."
+    
+    - name: Deploy to FTP
+      run: |
+        sudo apt-get install lftp
+        lftp -f "
+        open ftp://$FTP_USERNAME:$FTP_PASSWORD@$FTP_SERVER
+        mirror -R ./ $FTP_PATH --ignore-time --verbose
+        "
