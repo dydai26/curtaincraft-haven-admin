@@ -9,9 +9,17 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { X, Plus, Upload, Image } from 'lucide-react';
-import { fileToBase64 } from '@/lib/adminUtils';
+import { X, Plus, Upload, Image, Loader2 } from 'lucide-react';
+import { storageUtils } from '@/lib/storageUtils';
 import { useToast } from '@/components/ui/use-toast';
+import { Label } from '@/components/ui/label';
+import { v4 as uuidv4 } from 'uuid';
+
+const sizeVariantSchema = z.object({
+  size: z.string().min(1, { message: 'Розмір не може бути порожнім' }),
+  price: z.number().min(0, { message: 'Ціна має бути більше або дорівнювати 0' }),
+  inStock: z.boolean(),
+});
 
 const formSchema = z.object({
   name: z.string().min(3, { message: 'Назва товару має бути не менше 3 символів' }),
@@ -24,6 +32,7 @@ const formSchema = z.object({
   material: z.string().optional(),
   dimensions: z.string().optional(),
   care: z.string().optional(),
+  characteristics: z.array(z.string()).optional(),
   inStock: z.boolean(),
   isNew: z.boolean().optional(),
   isFeatured: z.boolean().optional(),
@@ -37,7 +46,7 @@ interface ProductFormProps {
   product?: Product;
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onSave: (product: any) => void;
+  onSave: (product: Product) => void;
 }
 
 const ProductForm: React.FC<ProductFormProps> = ({ 
@@ -53,9 +62,8 @@ const ProductForm: React.FC<ProductFormProps> = ({
       { size: "", price: 0, inStock: true },
     ]
   );
-  const [features, setFeatures] = useState<string[]>(product?.features || []);
+  const [characteristics, setCharacteristics] = useState<string[]>(product?.characteristics || []);
   const [images, setImages] = useState<string[]>(product?.images || []);
-  const [imageUrl, setImageUrl] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
@@ -71,6 +79,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
       material: product?.material || '',
       dimensions: product?.dimensions || '',
       care: product?.care || '',
+      characteristics: product?.characteristics || [],
       inStock: product?.inStock ?? true,
       isNew: product?.isNew || false,
       isFeatured: product?.isFeatured || false,
@@ -85,11 +94,28 @@ const ProductForm: React.FC<ProductFormProps> = ({
       variant => variant.size !== "" && variant.price > 0
     );
     
-    const newProduct = {
-      ...values,
+    // Видаляємо префікс /public/ з шляхів до зображень
+    const processedImages = values.images.map(img => 
+      img.replace('/public/', '')
+    );
+    
+    const newProduct: Product = {
+      id: product?.id || uuidv4(),
+      name: values.name,
+      price: values.price,
+      category: values.category,
+      subcategory: values.subcategory,
+      description: values.description,
+      material: values.material,
+      dimensions: values.dimensions,
+      care: values.care,
+      characteristics: characteristics,
+      inStock: values.inStock,
+      isNew: values.isNew,
+      isFeatured: values.isFeatured,
+      discount: values.discount,
+      images: processedImages,
       sizeVariants: filteredSizeVariants,
-      features,
-      id: product?.id || Date.now(),
     };
     
     onSave(newProduct);
@@ -110,14 +136,14 @@ const ProductForm: React.FC<ProductFormProps> = ({
     setSizeVariants(updatedVariants);
   };
 
-  const addFeature = (feature: string) => {
-    if (feature.trim() !== "") {
-      setFeatures([...features, feature]);
+  const addCharacteristic = (characteristic: string) => {
+    if (characteristic.trim() !== "") {
+      setCharacteristics([...characteristics, characteristic]);
     }
   };
 
-  const removeFeature = (index: number) => {
-    setFeatures(features.filter((_, i) => i !== index));
+  const removeCharacteristic = (index: number) => {
+    setCharacteristics(characteristics.filter((_, i) => i !== index));
   };
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -126,10 +152,23 @@ const ProductForm: React.FC<ProductFormProps> = ({
 
     setIsUploading(true);
     try {
-      const filePromises = Array.from(files).map(file => fileToBase64(file));
-      const base64Images = await Promise.all(filePromises);
+      console.log('Starting file upload...');
+      const uploadPromises = Array.from(files).map(async (file) => {
+        console.log('Uploading file:', file.name);
+        try {
+          const url = await storageUtils.uploadImage(file);
+          console.log('File uploaded successfully:', url);
+          return url;
+        } catch (error) {
+          console.error('Error uploading file:', file.name, error);
+          throw error;
+        }
+      });
+
+      const uploadedUrls = await Promise.all(uploadPromises);
+      console.log('All files uploaded:', uploadedUrls);
       
-      const newImages = [...images, ...base64Images];
+      const newImages = [...images, ...uploadedUrls];
       setImages(newImages);
       form.setValue('images', newImages);
       
@@ -138,12 +177,12 @@ const ProductForm: React.FC<ProductFormProps> = ({
         description: `${files.length} ${files.length === 1 ? 'зображення було' : 'зображень було'} успішно завантажено.`,
       });
     } catch (error) {
+      console.error("Detailed upload error:", error);
       toast({
         title: "Помилка завантаження",
-        description: "Не вдалося завантажити зображення. Спробуйте ще раз.",
+        description: "Не вдалося завантажити зображення. Перевірте консоль для деталей.",
         variant: "destructive",
       });
-      console.error("Error uploading images:", error);
     } finally {
       setIsUploading(false);
       if (fileInputRef.current) {
@@ -152,23 +191,31 @@ const ProductForm: React.FC<ProductFormProps> = ({
     }
   };
 
-  const addImage = () => {
-    if (imageUrl.trim() !== "") {
-      const newImages = [...images, imageUrl];
+  const removeImage = async (index: number) => {
+    try {
+      const imageUrl = images[index];
+      // Отримуємо шлях до файлу з URL
+      const path = imageUrl.split('/').pop();
+      if (path) {
+        await storageUtils.deleteImage(`products/${path}`);
+      }
+      
+      const newImages = images.filter((_, i) => i !== index);
       setImages(newImages);
       form.setValue('images', newImages);
-      setImageUrl("");
+      
+      toast({
+        title: "Зображення видалено",
+        description: "Зображення було успішно видалено.",
+      });
+    } catch (error) {
+      toast({
+        title: "Помилка видалення",
+        description: "Не вдалося видалити зображення. Спробуйте ще раз.",
+        variant: "destructive",
+      });
+      console.error("Error deleting image:", error);
     }
-  };
-
-  const removeImage = (index: number) => {
-    const newImages = images.filter((_, i) => i !== index);
-    setImages(newImages);
-    form.setValue('images', newImages);
-  };
-
-  const triggerFileInput = () => {
-    fileInputRef.current?.click();
   };
 
   return (
@@ -341,84 +388,65 @@ const ProductForm: React.FC<ProductFormProps> = ({
               </FormItem>
             </div>
             
-            <div className="grid grid-cols-1 gap-4">
-              <FormItem>
-                <FormLabel>Зображення</FormLabel>
-                <div className="space-y-2">
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label>Зображення</Label>
+                <div className="flex items-center gap-4">
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={handleFileChange}
+                    className="flex-1"
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={isUploading}
+                  >
+                    {isUploading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Завантаження...
+                      </>
+                    ) : (
+                      <>
+                        <Upload className="mr-2 h-4 w-4" />
+                        Завантажити
+                      </>
+                    )}
+                  </Button>
+                </div>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  className="hidden"
+                  onChange={handleFileChange}
+                />
+              </div>
+              {images.length > 0 && (
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
                   {images.map((image, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <div className="relative w-12 h-12 overflow-hidden rounded border mr-2">
-                        <img src={image} alt={`Товар ${index + 1}`} className="w-full h-full object-cover" />
-                      </div>
-                      <Input value={image} disabled className="flex-grow" />
-                      <Button 
-                        type="button" 
-                        variant="ghost" 
-                        size="icon" 
+                    <div key={index} className="relative group">
+                      <img
+                        src={image}
+                        alt={`Product image ${index + 1}`}
+                        className="w-full h-32 object-cover rounded-lg"
+                      />
+                      <button
+                        type="button"
                         onClick={() => removeImage(index)}
+                        className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                       >
                         <X className="h-4 w-4" />
-                      </Button>
+                      </button>
                     </div>
                   ))}
-                  
-                  <div className="flex flex-col gap-2">
-                    <div className="flex items-center gap-2">
-                      <Input
-                        placeholder="URL зображення"
-                        value={imageUrl}
-                        onChange={(e) => setImageUrl(e.target.value)}
-                        className="flex-grow"
-                      />
-                      <Button
-                        type="button"
-                        variant="outline"
-                        onClick={addImage}
-                      >
-                        Додати URL
-                      </Button>
-                    </div>
-                    
-                    <div className="flex items-center gap-2 mt-2">
-                      <input
-                        type="file"
-                        ref={fileInputRef}
-                        onChange={handleFileChange}
-                        accept="image/*"
-                        multiple
-                        className="hidden"
-                      />
-                      <Button
-                        type="button"
-                        variant="secondary"
-                        onClick={triggerFileInput}
-                        disabled={isUploading}
-                        className="w-full"
-                      >
-                        {isUploading ? (
-                          <span className="flex items-center gap-2">
-                            <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
-                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                            Завантаження...
-                          </span>
-                        ) : (
-                          <span className="flex items-center gap-2">
-                            <Upload className="h-4 w-4" />
-                            Завантажити з комп'ютера
-                          </span>
-                        )}
-                      </Button>
-                    </div>
-                  </div>
                 </div>
-                {form.formState.errors.images && (
-                  <p className="text-sm font-medium text-destructive mt-2">
-                    {form.formState.errors.images.message}
-                  </p>
-                )}
-              </FormItem>
+              )}
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -473,14 +501,14 @@ const ProductForm: React.FC<ProductFormProps> = ({
               <FormItem>
                 <FormLabel>Особливості</FormLabel>
                 <div className="space-y-2">
-                  {features.map((feature, index) => (
+                  {characteristics.map((characteristic, index) => (
                     <div key={index} className="flex items-center gap-2">
-                      <Input value={feature} disabled className="flex-grow" />
+                      <Input value={characteristic} disabled className="flex-grow" />
                       <Button 
                         type="button" 
                         variant="ghost" 
                         size="icon" 
-                        onClick={() => removeFeature(index)}
+                        onClick={() => removeCharacteristic(index)}
                       >
                         <X className="h-4 w-4" />
                       </Button>
@@ -493,7 +521,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                       onKeyDown={(e) => {
                         if (e.key === 'Enter') {
                           e.preventDefault();
-                          addFeature(e.currentTarget.value);
+                          addCharacteristic(e.currentTarget.value);
                           e.currentTarget.value = '';
                         }
                       }}
@@ -505,7 +533,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                       onClick={() => {
                         const input = document.querySelector('input[placeholder="Нова особливість"]') as HTMLInputElement;
                         if (input) {
-                          addFeature(input.value);
+                          addCharacteristic(input.value);
                           input.value = '';
                         }
                       }}

@@ -1,12 +1,12 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import ProtectedRoute from '@/components/admin/ProtectedRoute';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
-import { LogOut, Package, Settings, ShoppingBag } from 'lucide-react';
+import { LogOut, Package, Settings, ShoppingBag, MessageSquare } from 'lucide-react';
 import ProductsAdmin from '@/components/admin/ProductsAdmin';
+import { ReviewsAdmin } from '@/components/admin/ReviewsAdmin';
 import AdminHeader from '@/components/admin/AdminHeader';
 
 const AdminPanel = () => {
@@ -26,7 +26,7 @@ const AdminPanel = () => {
         
         <main className="container py-6">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
-            <TabsList className="grid w-full md:w-auto grid-cols-2 md:grid-cols-3 mb-4">
+            <TabsList className="grid w-full md:w-auto grid-cols-2 md:grid-cols-4 mb-4">
               <TabsTrigger value="products" className="flex items-center gap-2">
                 <Package className="w-4 h-4" />
                 <span className="hidden md:inline">Товари</span>
@@ -34,6 +34,10 @@ const AdminPanel = () => {
               <TabsTrigger value="orders" className="flex items-center gap-2">
                 <ShoppingBag className="w-4 h-4" />
                 <span className="hidden md:inline">Замовлення</span>
+              </TabsTrigger>
+              <TabsTrigger value="reviews" className="flex items-center gap-2">
+                <MessageSquare className="w-4 h-4" />
+                <span className="hidden md:inline">Відгуки</span>
               </TabsTrigger>
               <TabsTrigger value="settings" className="flex items-center gap-2">
                 <Settings className="w-4 h-4" />
@@ -52,6 +56,10 @@ const AdminPanel = () => {
                   Функціональність замовлень буде реалізована в наступних оновленнях.
                 </p>
               </div>
+            </TabsContent>
+
+            <TabsContent value="reviews" className="space-y-4">
+              <ReviewsAdmin />
             </TabsContent>
             
             <TabsContent value="settings" className="space-y-4">

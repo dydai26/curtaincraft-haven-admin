@@ -5,7 +5,7 @@ export type SizeVariant = {
 };
 
 export type Product = {
-  id: number;
+  id: string;
   name: string;
   price: number;
   category: 'curtains' | 'tulle' | 'accessories';
@@ -15,7 +15,7 @@ export type Product = {
   material?: string;
   dimensions?: string;
   care?: string;
-  features?: string[];
+  characteristics?: string[];
   inStock: boolean;
   isNew?: boolean;
   isFeatured?: boolean;
@@ -33,20 +33,24 @@ export type Category = {
 
 export const getProducts = (): Product[] => [
   {
-    id: 1,
+    id: "1",
     name: "Штори льон-блекаут",
     price: 1299,
     category: 'curtains',
     subcategory: 'Льон-Блекаут',
     images: [
-      '/public/1.jpg',
-      '/public/2-2.jpg'
+      '/1.jpg',
+      '/2-2.jpg'
     ],
     description: "Шторний матеріал льон-блекаут. Колір графітовий, максимальна висота 2,90м. Продаємо на метраж або шиємо під індивідуальні розміри.",
     material: "Льон-Блекаут",
     dimensions: "Ширина: 150 см, Висота: 270 см",
     care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
-    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    characteristics: [
+      "Матеріал: Льон-Блекаут",
+      "Розміри: Ширина: 150 см, Висота: 270 см",
+      "Догляд: Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі."
+    ],
     inStock: true,
     isFeatured: true,
     sizeVariants: [
@@ -57,7 +61,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 2,
+    id: "2",
     name: "Штори льон-блекаут",
     price: 1299,
     category: 'curtains',
@@ -71,9 +75,12 @@ export const getProducts = (): Product[] => [
     material: "Льон-Блекаут",
     dimensions: "Ширина: 150 см, Висота: 270 см",
     care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
-    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    characteristics: [
+      "Матеріал: Льон-Блекаут",
+      "Розміри: Ширина: 150 см, Висота: 270 см",
+      "Догляд: Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі."
+    ],
     inStock: true,
-   
     sizeVariants: [
       { size: "150x250 см", price: 1199, inStock: true },
       { size: "200x250 см", price: 1299, inStock: true },
@@ -82,7 +89,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 3,
+    id: "3",
     name: "Штори льон-блекаут",
     price: 1299,
     category: 'curtains',
@@ -95,9 +102,12 @@ export const getProducts = (): Product[] => [
     material: "Льон-Блекаут",
     dimensions: "Ширина: 150 см, Висота: 270 см",
     care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
-    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    characteristics: [
+      "Матеріал: Льон-Блекаут",
+      "Розміри: Ширина: 150 см, Висота: 270 см",
+      "Догляд: Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі."
+    ],
     inStock: true,
-    
     sizeVariants: [
       { size: "150x250 см", price: 1199, inStock: true },
       { size: "200x250 см", price: 1299, inStock: true },
@@ -106,7 +116,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 4,
+    id: "4",
     name: "Штори льон-блекаут",
     price: 1299,
     category: 'curtains',
@@ -118,7 +128,11 @@ export const getProducts = (): Product[] => [
     material: "Льон-Блекаут",
     dimensions: "Ширина: 150 см, Висота: 270 см",
     care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
-    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    characteristics: [
+      "Матеріал: Льон-Блекаут",
+      "Розміри: Ширина: 150 см, Висота: 270 см",
+      "Догляд: Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі."
+    ],
     inStock: true,
     isNew: true,
     sizeVariants: [
@@ -129,7 +143,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 5,
+    id: "5",
     name: "Штори льон-блекаут",
     price: 1299,
     category: 'curtains',
@@ -142,7 +156,11 @@ export const getProducts = (): Product[] => [
     material: "Льон-Блекаут",
     dimensions: "Ширина: 150 см, Висота: 270 см",
     care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
-    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    characteristics: [
+      "Матеріал: Льон-Блекаут",
+      "Розміри: Ширина: 150 см, Висота: 270 см",
+      "Догляд: Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі."
+    ],
     inStock: true,
     isFeatured: true,
     sizeVariants: [
@@ -153,7 +171,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 6,
+    id: "6",
     name: "Штори льон-блекаут",
     price: 1299,
     category: 'curtains',
@@ -166,9 +184,12 @@ export const getProducts = (): Product[] => [
     material: "Льон-Блекаут",
     dimensions: "Ширина: 150 см, Висота: 270 см",
     care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
-    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    characteristics: [
+      "Матеріал: Льон-Блекаут",
+      "Розміри: Ширина: 150 см, Висота: 270 см",
+      "Догляд: Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі."
+    ],
     inStock: true,
-    
     sizeVariants: [
       { size: "150x250 см", price: 1199, inStock: true },
       { size: "200x250 см", price: 1299, inStock: true },
@@ -177,7 +198,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 7,
+    id: "7",
     name: "Штори льон-блекаут",
     price: 1299,
     category: 'curtains',
@@ -190,9 +211,12 @@ export const getProducts = (): Product[] => [
     material: "Льон-Блекаут",
     dimensions: "Ширина: 150 см, Висота: 270 см",
     care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
-    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    characteristics: [
+      "Матеріал: Льон-Блекаут",
+      "Розміри: Ширина: 150 см, Висота: 270 см",
+      "Догляд: Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі."
+    ],
     inStock: true,
-    
     sizeVariants: [
       { size: "150x250 см", price: 1199, inStock: true },
       { size: "200x250 см", price: 1299, inStock: true },
@@ -201,7 +225,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 8,
+    id: "8",
     name: "Штори льон-блекаут",
     price: 1299,
     category: 'curtains',
@@ -214,7 +238,11 @@ export const getProducts = (): Product[] => [
     material: "Льон-Блекаут",
     dimensions: "Ширина: 150 см, Висота: 270 см",
     care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
-    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    characteristics: [
+      "Матеріал: Льон-Блекаут",
+      "Розміри: Ширина: 150 см, Висота: 270 см",
+      "Догляд: Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі."
+    ],
     inStock: true,
     isFeatured: true,
     sizeVariants: [
@@ -225,7 +253,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 9,
+    id: "9",
     name: "Штори льон-блекаут",
     price: 1299,
     category: 'curtains',
@@ -238,9 +266,12 @@ export const getProducts = (): Product[] => [
     material: "Льон-Блекаут двохсторонній",
     dimensions: "Ширина: 150 см, Висота: 270 см",
     care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
-    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    characteristics: [
+      "Матеріал: Льон-Блекаут двохсторонній",
+      "Розміри: Ширина: 150 см, Висота: 270 см",
+      "Догляд: Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі."
+    ],
     inStock: true,
-    
     sizeVariants: [
       { size: "150x250 см", price: 1199, inStock: true },
       { size: "200x250 см", price: 1299, inStock: true },
@@ -249,7 +280,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 10,
+    id: "10",
     name: "Мікровелюр",
     price: 1299,
     category: 'curtains',
@@ -262,7 +293,11 @@ export const getProducts = (): Product[] => [
     material: "Мікровелюр",
     dimensions: "Ширина: 150 см, Висота: 270 см",
     care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
-    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    characteristics: [
+      "Матеріал: Мікровелюр",
+      "Розміри: Ширина: 150 см, Висота: 270 см",
+      "Догляд: Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі."
+    ],
     inStock: true,
     isFeatured: true,
     sizeVariants: [
@@ -273,7 +308,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 11,
+    id: "11",
     name: "Мікровелюр",
     price: 1299,
     category: 'curtains',
@@ -286,7 +321,11 @@ export const getProducts = (): Product[] => [
     material: "Мікровелюр",
     dimensions: "Ширина: 150 см, Висота: 270 см",
     care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
-    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    characteristics: [
+      "Матеріал: Мікровелюр",
+      "Розміри: Ширина: 150 см, Висота: 270 см",
+      "Догляд: Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі."
+    ],
     inStock: true,
     isFeatured: true,
     sizeVariants: [
@@ -297,7 +336,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 12,
+    id: "12",
     name: "Мікровелюр",
     price: 1299,
     category: 'curtains',
@@ -310,9 +349,12 @@ export const getProducts = (): Product[] => [
     material: "Мікровелюр",
     dimensions: "Ширина: 150 см, Висота: 270 см",
     care: "Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі.",
-    features: ["Звукоізоляція", "Захист від УФ-променів", "Термоізоляція"],
+    characteristics: [
+      "Матеріал: Мікровелюр",
+      "Розміри: Ширина: 150 см, Висота: 270 см",
+      "Догляд: Делікатне прання при 30°C, не використовувати відбілювач, прасувати при низькій температурі."
+    ],
     inStock: true,
-    
     sizeVariants: [
       { size: "150x250 см", price: 1199, inStock: true },
       { size: "200x250 см", price: 1299, inStock: true },
@@ -321,7 +363,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 13,
+    id: "13",
     name: "Тюль матеріал фатин",
     price: 799,
     category: 'tulle',
@@ -334,7 +376,11 @@ export const getProducts = (): Product[] => [
     material: "100% поліестер",
     dimensions: "Ширина: 300 см, Висота: 270 см",
     care: "Машинне прання при 30°C, не використовувати відбілювач.",
-    features: ["Легке драпірування", "Стійкість до вигорання", "Гіпоалергенний матеріал"],
+    characteristics: [
+      "Матеріал: 100% поліестер",
+      "Розміри: Ширина: 300 см, Висота: 270 см",
+      "Догляд: Машинне прання при 30°C, не використовувати відбілювач."
+    ],
     inStock: true,
     isNew: true,
     sizeVariants: [
@@ -346,7 +392,7 @@ export const getProducts = (): Product[] => [
   },
   
   {
-    id: 14,
+    id: "14",
     name: "Широка стрічка'",
     price: 15,
     category: 'accessories',
@@ -357,7 +403,11 @@ export const getProducts = (): Product[] => [
     description: "Шторна стрічка використовується для встановлення та пошиття гардин. Тесьма має петлі, на які здійснюється підвішування тюлі або гардини до карниза на відповідні гачки. Пришивається по всій ширині тюлі..",
     material: "Тесьма виготовлена ​​з непрозорого текстилю.",
     dimensions: "6 см (ХБ)",
-    features: ["6 см (ХБ)", "Підходить для штор та гардин з будь-яких матеріалів.", "Країна виробництва	Туреччина"],
+    characteristics: [
+      "Матеріал: Тесьма виготовлена ​​з непрозорого текстилю.",
+      "Розміри: 6 см (ХБ)",
+      "Легке регулювання, Підходить для штор та гардин з будь-яких матеріалів."
+    ],
     inStock: true,
     sizeVariants: [
       { size: "150 см", price: 499, inStock: true },
@@ -367,7 +417,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 16,
+    id: "16",
     name: "Тюль матеріал фатин",
     price: 1599,
     category: 'tulle',
@@ -380,7 +430,11 @@ export const getProducts = (): Product[] => [
     material: "100% бавовняний оксамит",
     dimensions: "Ширина: 150 см, Висота: 270 см",
     care: "Тільки хімчистка",
-    features: ["Повне затемнення", "Звукоізоляція", "Термоізоляція"],
+    characteristics: [
+      "Матеріал: 100% бавовняний оксамит",
+      "Розміри: Ширина: 150 см, Висота: 270 см",
+      "Догляд: Тільки хімчистка"
+    ],
     inStock: true,
     isFeatured: true,
     sizeVariants: [
@@ -391,7 +445,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 15,
+    id: "15",
     name: "Тюль матеріал фатин",
     price: 799,
     category: 'tulle',
@@ -404,7 +458,11 @@ export const getProducts = (): Product[] => [
     material: "100% поліестер",
     dimensions: "Ширина: 300 см, Висота: 270 см",
     care: "Машинне прання при 30°C, не використовувати відбілювач.",
-    features: ["Легке драпірування", "Стійкість до вигорання", "Гіпоалергенний матеріал"],
+    characteristics: [
+      "Матеріал: 100% поліестер",
+      "Розміри: Ширина: 300 см, Висота: 270 см",
+      "Догляд: Машинне прання при 30°C, не використовувати відбілювач."
+    ],
     inStock: true,
     sizeVariants: [
       { size: "200x260 см", price: 699, inStock: true },
@@ -414,7 +472,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 17,
+    id: "17",
     name: "Жаккард під мармур",
     price: 1099,
     category: 'tulle',
@@ -428,10 +486,13 @@ export const getProducts = (): Product[] => [
     material: "Поліестер з вишивкою",
     dimensions: "Ширина: 300 см, Висота: 260 см",
     care: "Делікатне прання при 30°C, не викручувати",
-    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    characteristics: [
+      "Матеріал: Поліестер з вишивкою",
+      "Розміри: Ширина: 300 см, Висота: 260 см",
+      "Догляд: Делікатне прання при 30°C, не викручувати"
+    ],
     inStock: true,
     isNew: true,
-    
     sizeVariants: [
       { size: "200x260 см", price: 899, inStock: true },
       { size: "300x260 см", price: 1099, inStock: true },
@@ -440,7 +501,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 18,
+    id: "18",
     name: "Жаккард",
     price: 1099,
     category: 'tulle',
@@ -453,9 +514,12 @@ export const getProducts = (): Product[] => [
     material: "Поліестер з вишивкою",
     dimensions: "Ширина: 300 см, Висота: 260 см",
     care: "Делікатне прання при 30°C, не викручувати",
-    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    characteristics: [
+      "Матеріал: Поліестер з вишивкою",
+      "Розміри: Ширина: 300 см, Висота: 260 см",
+      "Догляд: Делікатне прання при 30°C, не викручувати"
+    ],
     inStock: true,
-    
     sizeVariants: [
       { size: "200x260 см", price: 899, inStock: true },
       { size: "300x260 см", price: 1099, inStock: true },
@@ -464,7 +528,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 19,
+    id: "19",
     name: "Жаккард",
     price: 1099,
     category: 'tulle',
@@ -477,9 +541,12 @@ export const getProducts = (): Product[] => [
     material: "Поліестер з вишивкою",
     dimensions: "Ширина: 300 см, Висота: 260 см",
     care: "Делікатне прання при 30°C, не викручувати",
-    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    characteristics: [
+      "Матеріал: Поліестер з вишивкою",
+      "Розміри: Ширина: 300 см, Висота: 260 см",
+      "Догляд: Делікатне прання при 30°C, не викручувати"
+    ],
     inStock: true,
-    
     sizeVariants: [
       { size: "200x260 см", price: 899, inStock: true },
       { size: "300x260 см", price: 1099, inStock: true },
@@ -488,7 +555,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 20,
+    id: "20",
     name: "Жаккард",
     price: 1099,
     category: 'tulle',
@@ -500,9 +567,12 @@ export const getProducts = (): Product[] => [
     material: "Поліестер з вишивкою",
     dimensions: "Ширина: 300 см, Висота: 260 см",
     care: "Делікатне прання при 30°C, не викручувати",
-    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    characteristics: [
+      "Матеріал: Поліестер з вишивкою",
+      "Розміри: Ширина: 300 см, Висота: 260 см",
+      "Догляд: Делікатне прання при 30°C, не викручувати"
+    ],
     inStock: true,
-    
     sizeVariants: [
       { size: "200x260 см", price: 899, inStock: true },
       { size: "300x260 см", price: 1099, inStock: true },
@@ -511,7 +581,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 21,
+    id: "21",
     name: "Льон-Бамбук",
     price: 1099,
     category: 'tulle',
@@ -523,9 +593,12 @@ export const getProducts = (): Product[] => [
     material: "Поліестер з вишивкою",
     dimensions: "Ширина: 300 см, Висота: 260 см",
     care: "Делікатне прання при 30°C, не викручувати",
-    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    characteristics: [
+      "Матеріал: Поліестер з вишивкою",
+      "Розміри: Ширина: 300 см, Висота: 260 см",
+      "Догляд: Делікатне прання при 30°C, не викручувати"
+    ],
     inStock: true,
-    
     sizeVariants: [
       { size: "200x260 см", price: 899, inStock: true },
       { size: "300x260 см", price: 1099, inStock: true },
@@ -534,7 +607,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 22,
+    id: "22",
     name: "Льон-Бамбук",
     price: 1099,
     category: 'tulle',
@@ -546,9 +619,12 @@ export const getProducts = (): Product[] => [
     material: "Поліестер з вишивкою",
     dimensions: "Ширина: 300 см, Висота: 260 см",
     care: "Делікатне прання при 30°C, не викручувати",
-    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    characteristics: [
+      "Матеріал: Поліестер з вишивкою",
+      "Розміри: Ширина: 300 см, Висота: 260 см",
+      "Догляд: Делікатне прання при 30°C, не викручувати"
+    ],
     inStock: true,
-    
     sizeVariants: [
       { size: "200x260 см", price: 899, inStock: true },
       { size: "300x260 см", price: 1099, inStock: true },
@@ -557,7 +633,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 23,
+    id: "23",
     name: "Льон-Бамбук",
     price: 1099,
     category: 'tulle',
@@ -570,9 +646,12 @@ export const getProducts = (): Product[] => [
     material: "Поліестер з вишивкою",
     dimensions: "Ширина: 300 см, Висота: 260 см",
     care: "Делікатне прання при 30°C, не викручувати",
-    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    characteristics: [
+      "Матеріал: Поліестер з вишивкою",
+      "Розміри: Ширина: 300 см, Висота: 260 см",
+      "Догляд: Делікатне прання при 30°C, не викручувати"
+    ],
     inStock: true,
-    
     sizeVariants: [
       { size: "200x260 см", price: 899, inStock: true },
       { size: "300x260 см", price: 1099, inStock: true },
@@ -581,7 +660,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 24,
+    id: "24",
     name: "Льон-Бамбук",
     price: 1099,
     category: 'tulle',
@@ -593,9 +672,12 @@ export const getProducts = (): Product[] => [
     material: "Поліестер з вишивкою",
     dimensions: "Ширина: 300 см, Висота: 260 см",
     care: "Делікатне прання при 30°C, не викручувати",
-    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    characteristics: [
+      "Матеріал: Поліестер з вишивкою",
+      "Розміри: Ширина: 300 см, Висота: 260 см",
+      "Догляд: Делікатне прання при 30°C, не викручувати"
+    ],
     inStock: true,
-    
     sizeVariants: [
       { size: "200x260 см", price: 899, inStock: true },
       { size: "300x260 см", price: 1099, inStock: true },
@@ -604,7 +686,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 25,
+    id: "25",
     name: "Льон-Бамбук",
     price: 1099,
     category: 'tulle',
@@ -616,7 +698,11 @@ export const getProducts = (): Product[] => [
     material: "Поліестер з вишивкою",
     dimensions: "Ширина: 300 см, Висота: 260 см",
     care: "Делікатне прання при 30°C, не викручувати",
-    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    characteristics: [
+      "Матеріал: Поліестер з вишивкою",
+      "Розміри: Ширина: 300 см, Висота: 260 см",
+      "Догляд: Делікатне прання при 30°C, не викручувати"
+    ],
     inStock: true,
     isFeatured: true,
     sizeVariants: [
@@ -627,7 +713,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 26,
+    id: "26",
     name: "Шифон",
     price: 1099,
     category: 'tulle',
@@ -640,9 +726,12 @@ export const getProducts = (): Product[] => [
     material: "Поліестер з вишивкою",
     dimensions: "Ширина: 300 см, Висота: 260 см",
     care: "Делікатне прання при 30°C, не викручувати",
-    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    characteristics: [
+      "Матеріал: Поліестер з вишивкою",
+      "Розміри: Ширина: 300 см, Висота: 260 см",
+      "Догляд: Делікатне прання при 30°C, не викручувати"
+    ],
     inStock: true,
-    
     sizeVariants: [
       { size: "200x260 см", price: 899, inStock: true },
       { size: "300x260 см", price: 1099, inStock: true },
@@ -651,7 +740,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 27,
+    id: "27",
     name: "Льон-Бамбук",
     price: 1099,
     category: 'tulle',
@@ -665,7 +754,11 @@ export const getProducts = (): Product[] => [
     material: "Поліестер з вишивкою",
     dimensions: "Ширина: 300 см, Висота: 260 см",
     care: "Делікатне прання при 30°C, не викручувати",
-    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    characteristics: [
+      "Матеріал: Поліестер з вишивкою",
+      "Розміри: Ширина: 300 см, Висота: 260 см",
+      "Догляд: Делікатне прання при 30°C, не викручувати"
+    ],
     inStock: true,
     isFeatured: true,
     sizeVariants: [
@@ -676,7 +769,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 28,
+    id: "28",
     name: "Льон",
     price: 1099,
     category: 'tulle',
@@ -690,9 +783,12 @@ export const getProducts = (): Product[] => [
     material: "Поліестер з вишивкою",
     dimensions: "Ширина: 300 см, Висота: 260 см",
     care: "Делікатне прання при 30°C, не викручувати",
-    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    characteristics: [
+      "Матеріал: Поліестер з вишивкою",
+      "Розміри: Ширина: 300 см, Висота: 260 см",
+      "Догляд: Делікатне прання при 30°C, не викручувати"
+    ],
     inStock: true,
-    
     sizeVariants: [
       { size: "200x260 см", price: 899, inStock: true },
       { size: "300x260 см", price: 1099, inStock: true },
@@ -701,7 +797,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 29,
+    id: "29",
     name: "Грек-сітка",
     price: 1099,
     category: 'tulle',
@@ -714,9 +810,12 @@ export const getProducts = (): Product[] => [
     material: "Поліестер з вишивкою",
     dimensions: "Ширина: 300 см, Висота: 260 см",
     care: "Делікатне прання при 30°C, не викручувати",
-    features: ["Елегантна вишивка", "Легке драпірування", "Стійкість до вигорання"],
+    characteristics: [
+      "Матеріал: Поліестер з вишивкою",
+      "Розміри: Ширина: 300 см, Висота: 260 см",
+      "Догляд: Делікатне прання при 30°C, не викручувати"
+    ],
     inStock: true,
-    
     sizeVariants: [
       { size: "200x260 см", price: 899, inStock: true },
       { size: "300x260 см", price: 1099, inStock: true },
@@ -725,7 +824,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 180,
+    id: "180",
     name: "Вузька стрічка",
     price: 15,
     category: 'accessories',
@@ -735,7 +834,11 @@ export const getProducts = (): Product[] => [
     ],
     description: "Стрічка використовується для карнизів закритого типу, для карнизів, встановлених у стельовій ніші, якщо використовуються ламбрекени. Вузька шторна стрічка має винятково практичну функцію - кріплення штори до карнизу. Ця модель стрічки передбачає кріплення на гачки. Тесьма нашивається на верхній край штори по всій ширині, без урахування довжини карниза.",
     material: "Вузька стрічка",
-    features: ["Тесьма виготовлена ​​з непрозорого текстилю.", "2,5 см (ХБ)", "Легке регулювання, Підходить для штор та гардин з будь-яких матеріалів."],
+    characteristics: [
+      "Матеріал: Вузька стрічка",
+      "Розміри: Тесьма виготовлена ​​з непрозорого текстилю.",
+      "Легке регулювання, Підходить для штор та гардин з будь-яких матеріалів."
+    ],
     inStock: true,
     isNew: true,
     sizeVariants: [
@@ -746,7 +849,7 @@ export const getProducts = (): Product[] => [
     ]
   },
   {
-    id: 200,
+    id: "200",
     name: "Стрічка кріплення на трубу",
     price: 45,
     category: 'accessories',
@@ -757,7 +860,11 @@ export const getProducts = (): Product[] => [
     ],
     description: "Дана тасьма прозора, шириною 10см. Вона не має ниток для стягування, але є петлі шириною 4см які розташовані через 20см. Петлі одягаються на трубчатий карниз і формують глибокі, рівні складки на шторі чи гардині. Ця тасьма дозволить підкреслити фактуру та малюнок тканини і допоможе без зайвих витрат зробити вигляд готового виробу актуальним та стильним.",
     material: "Тесьма, кріплення на карниз 6 см (ХБ)",
-    features: ["Легкий монтаж", "10 см", "Країна виробництва	Туреччина"],
+    characteristics: [
+      "Матеріал: Тесьма, кріплення на карниз 6 см (ХБ)",
+      "Легкий монтаж",
+      "Країна виробництва	Туреччина"
+    ],
     inStock: true,
     sizeVariants: [
       { size: "Класичний", price: 399, inStock: true },
@@ -797,7 +904,7 @@ export const getProductsByCategory = (category: string): Product[] => {
   return getProducts().filter(product => product.category === category);
 };
 
-export const getProductById = (id: number): Product | undefined => {
+export const getProductById = (id: string): Product | undefined => {
   return getProducts().find(product => product.id === id);
 };
 

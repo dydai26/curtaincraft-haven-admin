@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Product } from '@/lib/data';
@@ -47,26 +46,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           )}
           <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/10" />
           <div className="absolute bottom-2 right-2 flex space-x-2 scale-90 opacity-0 transition-all group-hover:scale-100 group-hover:opacity-100">
-            <Button
-              size="icon"
-              variant="secondary"
-              className="h-8 w-8 rounded-full shadow-md"
+            <div
+              role="button"
+              tabIndex={0}
+              className="h-8 w-8 rounded-full shadow-md bg-secondary flex items-center justify-center cursor-pointer hover:bg-secondary/80"
               onClick={handleAddToCart}
             >
               <ShoppingCart className="h-4 w-4" />
               <span className="sr-only">Додати в кошик</span>
-            </Button>
-            <Button
-              size="icon"
-              variant="secondary"
-              className="h-8 w-8 rounded-full shadow-md"
-              asChild
-            >
-              <Link to={`/product/${product.id}`}>
-                <Eye className="h-4 w-4" />
-                <span className="sr-only">Переглянути</span>
-              </Link>
-            </Button>
+            </div>
+            <div className="h-8 w-8 rounded-full shadow-md bg-secondary flex items-center justify-center">
+              <Eye className="h-4 w-4" />
+              <span className="sr-only">Переглянути</span>
+            </div>
           </div>
         </div>
         <div className="p-4">
