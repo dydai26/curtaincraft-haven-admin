@@ -24,7 +24,7 @@ const Index = () => {
         {/* Hero Section */}
         <section className="relative h-[80vh] min-h-[600px] w-full overflow-hidden">
           <img
-            src="/public/baner.jpg"
+            src="/baner.jpg"
             alt="Elegant living room with beautiful curtains"
             className="absolute inset-0 h-full w-full object-cover"
           />
